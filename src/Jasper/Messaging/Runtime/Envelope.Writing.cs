@@ -92,6 +92,8 @@ namespace Jasper.Messaging.Runtime
                 }
             }
 
+            EnsureData();
+
             writer.Write(Data.Length);
             writer.Write(Data);
         }
