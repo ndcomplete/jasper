@@ -63,11 +63,6 @@ namespace JasperHttp
         /// </summary>
         public ComplianceMode AspNetCoreCompliance { get; set; } = ComplianceMode.FullyCompliant;
 
-        /// <summary>
-        ///     Completely enable or disable all Jasper HTTP features
-        /// </summary>
-        public bool Enabled { get; set; } = true;
-
         internal Assembly ApplicationAssembly { get; set; }
 
         internal UrlGraph Urls { get; } = new UrlGraph();
@@ -88,31 +83,6 @@ namespace JasperHttp
         public void GlobalPolicy(IRoutePolicy policy)
         {
             _policies.Add(policy);
-        }
-
-
-        internal async Task<RouteTree> BuildRouting(IContainer container, GenerationRules generation)
-        {
-            if (!Enabled) return null;
-
-            var actions = await FindActions(ApplicationAssembly);
-
-            foreach (var methodCall in actions)
-            {
-                var chain = Routes.AddRoute(methodCall);
-                Urls.Register(chain.Route);
-            }
-
-            foreach (var policy in _policies) policy.Apply(Routes, generation);
-
-            Routes.AssertNoDuplicateRoutes();
-
-            Routes.Seal();
-
-            var tree = new RouteTree(this, generation);
-            tree.CompileAll(container);
-
-            return tree;
         }
 
 

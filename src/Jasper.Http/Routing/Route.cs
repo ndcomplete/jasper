@@ -85,19 +85,6 @@ namespace JasperHttp.Routing
         public Type HandlerType { get; set; }
         public MethodInfo Method { get; set; }
 
-        public bool EndsWithArgument
-        {
-            get
-            {
-                if (_segments.LastOrDefault() is RouteArgument) return true;
-
-                if (_segments.LastOrDefault() is Spread && _segments.Count >= 2)
-                    return _segments[_segments.Count - 2] is RouteArgument;
-
-                return false;
-            }
-        }
-
         public bool HasParameters => HasSpread || _arguments.Value.Any();
 
         public IEnumerable<RouteArgument> Arguments => _arguments.Value.ToArray();
@@ -108,18 +95,6 @@ namespace JasperHttp.Routing
 
         public string Name { get; set; }
         public string HttpMethod { get; internal set; }
-
-        public string NodePath
-        {
-            get
-            {
-                var segments = _segments.ToArray().Reverse().Skip(1).Reverse().ToArray();
-
-                if (HasSpread && EndsWithArgument) segments = _segments.ToArray().Reverse().Skip(2).Reverse().ToArray();
-
-                return string.Join("/", segments.Select(x => x.CanonicalPath()));
-            }
-        }
 
         public string LastSegment => _segments.Count == 0 ? string.Empty : _segments.Last().CanonicalPath();
 
@@ -197,18 +172,6 @@ namespace JasperHttp.Routing
         }
 
 
-        public void WriteToInputModel(object model, Dictionary<string, object> dict)
-        {
-            if (model == null) throw new ArgumentNullException(nameof(model));
-
-            if (model.GetType() != InputType)
-                throw new ArgumentOutOfRangeException(nameof(model),
-                    $"This route maps to {InputType} but got {model.GetType()}");
-
-
-            _arguments.Value.Each(x => x.ApplyRouteDataToInput(model, dict));
-        }
-
         public string ToUrlFromInputModel(object model)
         {
             return "/" + _segments.Select(x => x.SegmentFromModel(model)).Join("/");
@@ -230,60 +193,5 @@ namespace JasperHttp.Routing
             return "/" + _segments.Select(x => x.SegmentFromParameters(parameters)).Join("/");
         }
 
-        public void Place(RouteTree tree)
-        {
-            var method = tree.ForMethod(HttpMethod);
-
-
-            var count = _segments.Count;
-            switch (count)
-            {
-                case 0:
-                    method.Root = this;
-                    break;
-
-                case 1:
-                    if (HasSpread)
-                        method.SpreadRoute = this;
-                    else if (HasParameters)
-                        method.ArgRoutes.Add(this);
-                    else
-                        method.Leaves.Add(this);
-
-                    break;
-
-                default:
-                    RouteNode current = method;
-                    for (var i = 0; i < _segments.Count - 1; i++)
-                    {
-                        var segment = _segments[i];
-                        if (segment is Segment s)
-                        {
-                            current = current.ChildFor(s.SegmentPath);
-                        }
-                        else if (segment is RouteArgument)
-                        {
-                            current.ArgRoutes.Add(this);
-                            break;
-                        }
-                        else
-                        {
-                            current.SpreadRoute = this;
-                            break;
-                        }
-                    }
-
-                    var last = _segments.Last();
-
-                    if (last is Segment)
-                        current.Leaves.Add(this);
-                    else if (last is RouteArgument)
-                        current.ArgRoutes.Add(this);
-                    else
-                        current.SpreadRoute = this;
-
-                    break;
-            }
-        }
     }
 }

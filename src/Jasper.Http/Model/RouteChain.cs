@@ -169,17 +169,6 @@ namespace JasperHttp.Model
             return handler;
         }
 
-        public void WriteRouteMatchMethod(GeneratedType generatedType)
-        {
-            if (Route.Segments.OfType<RouteArgument>().Any())
-            {
-                var method = new GeneratedMethod($"Matches{Route.VariableName}", typeof(bool),
-                    new Argument(typeof(string[]), "segments"));
-                generatedType.AddMethod(method);
-
-                method.Frames.Add(new RouteMatchFrame(Route));
-            }
-        }
 
         public override bool ShouldFlushOutgoingMessages()
         {

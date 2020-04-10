@@ -46,12 +46,6 @@ namespace JasperHttp.Routing
             throw new NotSupportedException();
         }
 
-        public void SetValues(HttpContext routeData, string[] segments)
-        {
-            var spreadData = getSpreadData(segments);
-            routeData.SetSpreadData(spreadData);
-        }
-
         private string[] getSpreadData(string[] segments)
         {
             if (segments.Length == 0) return new string[0];
