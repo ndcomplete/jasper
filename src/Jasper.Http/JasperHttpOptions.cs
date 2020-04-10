@@ -63,8 +63,6 @@ namespace JasperHttp
         /// </summary>
         public ComplianceMode AspNetCoreCompliance { get; set; } = ComplianceMode.FullyCompliant;
 
-        internal Assembly ApplicationAssembly { get; set; }
-
         internal UrlGraph Urls { get; } = new UrlGraph();
 
         /// <summary>

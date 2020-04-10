@@ -8,6 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace JasperHttp
 {
+    /// <summary>
+    /// This ensures that any concrete type that services HTTP
+    /// requests with Jasper is registered in the Lamar container
+    /// as "Scoped"
+    /// </summary>
     internal class RouteScopingPolicy : IFamilyPolicy
     {
         private readonly RouteGraph _routes;
