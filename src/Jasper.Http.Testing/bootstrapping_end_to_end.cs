@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
@@ -134,7 +135,8 @@ namespace HttpTests
     {
         public void Configure(JasperOptions registry)
         {
-            registry.Http(x => x.IncludeType<ExtensionThing>());
+            throw new NotImplementedException("redo");
+            //registry.Http(x => x.IncludeType<ExtensionThing>());
         }
     }
 

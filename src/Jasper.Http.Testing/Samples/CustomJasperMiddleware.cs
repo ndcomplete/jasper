@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Jasper;
@@ -111,10 +112,12 @@ namespace Samples
     {
         public StopwatchMonitoredApp()
         {
-            // Apply a handler policy
-            Handlers.GlobalPolicy<PutStopwatchOnHandlers>();
+            throw new NotImplementedException("redo");
 
-            Settings.Http(x => x.GlobalPolicy<PutStopwatchOnRoutes>());
+            // Apply a handler policy
+//            Handlers.GlobalPolicy<PutStopwatchOnHandlers>();
+//
+//            Settings.Http(x => x.GlobalPolicy<PutStopwatchOnRoutes>());
         }
     }
     // ENDSAMPLE

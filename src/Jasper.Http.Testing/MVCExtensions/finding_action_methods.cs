@@ -17,9 +17,10 @@ namespace HttpTests.MVCExtensions
     {
         public MvcExtendedApp()
         {
-            System = SystemUnderTest.For(x => x.UseStartup<Startup>().UseJasper());
-
-            Routes = System.Services.GetRequiredService<RouteGraph>();
+            throw new NotImplementedException("redo");
+//            System = SystemUnderTest.For(x => x.UseStartup<Startup>().UseJasper());
+//
+//            Routes = System.Services.GetRequiredService<RouteGraph>();
         }
 
         public RouteGraph Routes { get; set; }
@@ -51,7 +52,8 @@ namespace HttpTests.MVCExtensions
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseJasper();
+            throw new NotImplementedException("redo");
+            //app.UseJasper();
             app.UseMvc();
         }
     }

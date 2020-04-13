@@ -16,18 +16,19 @@ namespace HttpTests.Routing
     {
         public SampleAppWithRoutedAttributes()
         {
-            System = SystemUnderTest.For(x => x.UseStartup<Startup>().UseJasper(_ =>
-            {
-                _.Http(opts =>
-                {
-                    opts.DisableConventionalDiscovery()
-                        .IncludeType<AttributeUsingEndpointClass>()
-                        .IncludeType<IdiomaticJasperRouteEndpoint>();
-                });
-            }));
-
-
-            Routes = System.Services.GetRequiredService<RouteGraph>();
+            throw new NotImplementedException("redo");
+//            System = SystemUnderTest.For(x => x.UseStartup<Startup>().UseJasper(_ =>
+//            {
+//                _.Http(opts =>
+//                {
+//                    opts.DisableConventionalDiscovery()
+//                        .IncludeType<AttributeUsingEndpointClass>()
+//                        .IncludeType<IdiomaticJasperRouteEndpoint>();
+//                });
+//            }));
+//
+//
+//            Routes = System.Services.GetRequiredService<RouteGraph>();
         }
 
         public RouteGraph Routes { get; set; }

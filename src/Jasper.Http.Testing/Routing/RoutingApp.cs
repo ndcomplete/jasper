@@ -1,4 +1,5 @@
-﻿using Jasper;
+﻿using System;
+using Jasper;
 using TestingSupport;
 
 namespace HttpTests.Routing
@@ -8,13 +9,13 @@ namespace HttpTests.Routing
         public RoutingApp()
         {
             Handlers.DisableConventionalDiscovery();
-
-            Settings.Http(x =>
-            {
-                x.DisableConventionalDiscovery()
-                    .IncludeType<SpreadHttpActions>()
-                    .IncludeType<RouteEndpoints>();
-            });
+            throw new NotImplementedException("redo");
+//            Settings.Http(x =>
+//            {
+//                x.DisableConventionalDiscovery()
+//                    .IncludeType<SpreadHttpActions>()
+//                    .IncludeType<RouteEndpoints>();
+//            });
         }
     }
 }

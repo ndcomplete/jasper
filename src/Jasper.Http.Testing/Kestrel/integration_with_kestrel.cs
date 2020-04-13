@@ -21,19 +21,22 @@ namespace HttpTests.Kestrel
     {
         public DefaultApp()
         {
-            Host = WebHost.CreateDefaultBuilder()
-                .UseKestrel(o => o.ListenLocalhost(5025))
-                .UseUrls("http://localhost:5025")
-                .UseStartup<Startup>()
-                .UseJasper(x =>
-                {
-                    x.Http(opts => opts
-                        .DisableConventionalDiscovery()
-                        .IncludeType<HomeEndpointGuy>()
-                        .IncludeType<UserController>());
-
-                    x.Services.AddSingleton(new UserRepository());
-                }).Start();
+            throw new NotImplementedException("redo");
+//            Host = WebHost.CreateDefaultBuilder()
+//                .UseKestrel(o => o.ListenLocalhost(5025))
+//                .UseUrls("http://localhost:5025")
+//
+//                .UseStartup<Startup>()
+//
+//                .UseJasper(x =>
+//                {
+//                    x.Http(opts => opts
+//                        .DisableConventionalDiscovery()
+//                        .IncludeType<HomeEndpointGuy>()
+//                        .IncludeType<UserController>());
+//
+//                    x.Services.AddSingleton(new UserRepository());
+//                }).Start();
         }
 
         public IWebHost Host { get; }

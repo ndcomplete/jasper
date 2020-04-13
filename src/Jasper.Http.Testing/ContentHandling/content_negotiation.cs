@@ -18,13 +18,13 @@ namespace HttpTests.ContentHandling
         public ConnegRegistry()
         {
             Handlers.DisableConventionalDiscovery();
-
-            Settings.Http(x => x.IncludeType<CustomReaderWriterEndpoint>());
+            throw new NotImplementedException("redo");
+            //Settings.Http(x => x.IncludeType<CustomReaderWriterEndpoint>());
 
             Services.For<IRequestReader>().Add<XmlReader<SpecialInput>>();
             Services.For<IResponseWriter>().Add<XmlWriter<SpecialOutput>>();
 
-            Hosting(x => x.Configure(app => app.UseJasper()));
+            //Hosting(x => x.Configure(app => app.UseJasper()));
         }
     }
 

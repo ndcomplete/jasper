@@ -30,10 +30,11 @@ namespace HttpTests
     {
         private readonly Lazy<SystemUnderTest> _sut = new Lazy<SystemUnderTest>(() =>
         {
-            var system = JasperAlba.For<T>();
-            system.Services.As<Container>().DisposalLock = DisposalLock.ThrowOnDispose;
-
-            return system;
+            throw new NotImplementedException("redo");
+//            var system = JasperAlba.For<T>();
+//            system.Services.As<Container>().DisposalLock = DisposalLock.ThrowOnDispose;
+//
+//            return system;
         });
 
         public SystemUnderTest System => _sut.Value;
