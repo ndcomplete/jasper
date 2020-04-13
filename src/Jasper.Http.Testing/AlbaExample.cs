@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Alba;
 using Xunit;
 
 namespace HttpTests
@@ -41,7 +42,7 @@ namespace HttpTests
         public ApplicationFixture()
         {
             // Your application setup here would probably
-            // refer to a JasperRegistry for your application
+            // refer to a JasperOptions for your application
             Runtime = JasperAlba.ForBasic();
         }
 

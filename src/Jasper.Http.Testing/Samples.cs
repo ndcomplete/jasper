@@ -2,6 +2,10 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Jasper;
+using Jasper.Attributes;
+using Jasper.Serialization;
+using Marten;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -199,8 +203,8 @@ namespace HttpTests
     }
     // ENDSAMPLE
 
-    // SAMPLE: overwriting-the-JSON-serialization-with-JasperRegistry
-    public class MySpecialJsonUsingApp : JasperRegistry
+    // SAMPLE: overwriting-the-JSON-serialization-with-JasperOptions
+    public class MySpecialJsonUsingApp : JasperOptions
     {
         public MySpecialJsonUsingApp()
         {
@@ -252,7 +256,7 @@ namespace HttpTests
     // ENDSAMPLE
 
     // SAMPLE: registering-custom-readers-writers
-    public class AppWithCustomSerializers : JasperRegistry
+    public class AppWithCustomSerializers : JasperOptions
     {
         public AppWithCustomSerializers()
         {

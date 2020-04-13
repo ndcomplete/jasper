@@ -2,6 +2,7 @@
 using System.Threading;
 using JasperHttp.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Shouldly;
 using Xunit;
 
@@ -20,6 +21,7 @@ namespace HttpTests.Model
         [Fact]
         public void can_find_authentication_manager()
         {
+
             matchesAndCanCreate<AuthenticationManager>();
         }
 

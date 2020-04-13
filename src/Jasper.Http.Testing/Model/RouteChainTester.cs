@@ -3,8 +3,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Baseline.Reflection;
+using Jasper.Attributes;
 using JasperHttp.ContentHandling;
 using JasperHttp.Model;
+using Lamar;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
 using Shouldly;
@@ -49,7 +51,7 @@ namespace HttpTests.Model
         public void will_apply_generic_chain_attributes()
         {
             var chain = chainFor(x => x.post_select_name(null));
-            var frames = chain.DetermineFrames(ConnegRules.Empty(), new GenerationRules("Something"));
+            var frames = chain.DetermineFrames(ConnegRules.Empty(), new GenerationRules("Something"), Container.Empty());
 
             chain.Middleware.Any(x => x is FakeMiddleware1).ShouldBeTrue();
             chain.Middleware.Any(x => x is FakeMiddleware2).ShouldBeTrue();

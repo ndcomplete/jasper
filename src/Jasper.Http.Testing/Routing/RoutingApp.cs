@@ -1,6 +1,9 @@
-﻿namespace HttpTests.Routing
+﻿using Jasper;
+using TestingSupport;
+
+namespace HttpTests.Routing
 {
-    public class RoutingApp : JasperRegistry
+    public class RoutingApp : JasperOptions
     {
         public RoutingApp()
         {

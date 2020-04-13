@@ -1,13 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using Jasper.Attributes;
 using Jasper.Configuration;
 using JasperHttp.ContentHandling;
 using JasperHttp.Model;
+using Lamar;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 using Shouldly;
+using TestingSupport.Fakes;
 using Xunit;
+using Container = Lamar.Container;
 
 namespace HttpTests
 {
@@ -18,7 +23,7 @@ namespace HttpTests
         {
             var chain = RouteChain.For<ConfiguredEndpoint>(x => x.get_wrapper3());
 
-            var frames = chain.DetermineFrames(ConnegRules.Empty(), GenerationRules.Empty());
+            var frames = chain.DetermineFrames(ConnegRules.Empty(), new GenerationRules(), Container.Empty());
 
             frames.OfType<FakeWrapper3>().Any().ShouldBeTrue();
         }
@@ -28,7 +33,7 @@ namespace HttpTests
         {
             var chain = RouteChain.For<ConfiguredEndpoint>(x => x.get_wrapper2());
 
-            var frames = chain.DetermineFrames(ConnegRules.Empty(), GenerationRules.Empty());
+            var frames = chain.DetermineFrames(ConnegRules.Empty(), new GenerationRules(), Container.Empty());
 
             frames.OfType<FakeWrapper2>().Any().ShouldBeTrue();
         }
@@ -38,7 +43,7 @@ namespace HttpTests
         {
             var chain = RouteChain.For<ConfiguredEndpoint>(x => x.get_configured());
 
-            var frames = chain.DetermineFrames(ConnegRules.Empty(), GenerationRules.Empty());
+            var frames = chain.DetermineFrames(ConnegRules.Empty(), new GenerationRules(), Container.Empty());
 
             frames.OfType<FakeWrapper>().Any().ShouldBeTrue();
         }
@@ -48,7 +53,7 @@ namespace HttpTests
         {
             var chain = RouteChain.For<ConfiguredEndpoint>(x => x.get_configured());
 
-            var frames = chain.DetermineFrames(ConnegRules.Empty(), GenerationRules.Empty());
+            var frames = chain.DetermineFrames(ConnegRules.Empty(), new GenerationRules(), Container.Empty());
 
             frames.OfType<FakeTransaction>().Any().ShouldBeTrue();
         }
@@ -104,7 +109,7 @@ namespace HttpTests
 
     public class FakeWrapper3Attribute : ModifyChainAttribute
     {
-        public override void Modify(IChain chain, GenerationRules rules)
+        public override void Modify(IChain chain, GenerationRules rules, Lamar.IContainer container)
         {
             chain.Middleware.Add(new FakeWrapper3());
         }

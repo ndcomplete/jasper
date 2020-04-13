@@ -1,6 +1,8 @@
-﻿namespace HttpTests
+﻿using Jasper;
+
+namespace HttpTests
 {
-    public class HttpTestingApp : JasperRegistry
+    public class HttpTestingApp : JasperOptions
     {
     }
 }

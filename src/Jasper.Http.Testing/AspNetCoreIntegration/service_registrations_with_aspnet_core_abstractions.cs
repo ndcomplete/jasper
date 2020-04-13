@@ -1,5 +1,8 @@
 ﻿using System;
+using Jasper;
+using Lamar;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 using Xunit;
 
 namespace HttpTests.AspNetCoreIntegration
@@ -17,7 +20,7 @@ namespace HttpTests.AspNetCoreIntegration
         [Fact]
         public void adds_the_core_service_provider_abstractions()
         {
-            var registry = new JasperRegistry();
+            var registry = new JasperOptions();
             registry.Services.AddTransient<IService, FooService>();
 
             using (var runtime = JasperHost.For(registry))
@@ -30,12 +33,12 @@ namespace HttpTests.AspNetCoreIntegration
         [Fact]
         public void services_registered_by_the_DI_abstraction_are_in_the_container()
         {
-            var registry = new JasperRegistry();
+            var registry = new JasperOptions();
             registry.Services.AddTransient<IService, FooService>();
 
-            using (var runtime = JasperHost.For(registry))
+            using (var host = JasperHost.For(registry))
             {
-                runtime.Container.Model.For<IService>().Default.ImplementationType
+                host.Services.GetRequiredService<IContainer>().Model.For<IService>().Default.ImplementationType
                     .ShouldBe(typeof(FooService));
             }
         }

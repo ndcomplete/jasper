@@ -1,22 +1,26 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Baseline;
 using Jasper;
 using JasperHttp.ContentHandling;
 using JasperHttp.Model;
 using JasperHttp.Routing;
 using Lamar;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shouldly;
+using TestingSupport;
 using Xunit;
 
 namespace HttpTests
 {
-    public class HttpBootstrappedApp : JasperRegistry
+    public class HttpBootstrappedApp : JasperOptions
     {
         public HttpBootstrappedApp()
         {
-            Include<EndpointExtension>();
+            Extensions.Include<EndpointExtension>();
 
             Handlers.DisableConventionalDiscovery();
 
@@ -128,7 +132,7 @@ namespace HttpTests
 
     public class EndpointExtension : IJasperExtension
     {
-        public void Configure(JasperRegistry registry)
+        public void Configure(JasperOptions registry)
         {
             registry.Http(x => x.IncludeType<ExtensionThing>());
         }

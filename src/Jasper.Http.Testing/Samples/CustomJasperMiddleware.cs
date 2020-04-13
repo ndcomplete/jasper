@@ -1,8 +1,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using Jasper;
+using Jasper.Attributes;
 using Jasper.Configuration;
+using Jasper.Runtime.Handlers;
 using JasperHttp;
 using JasperHttp.Model;
+using Lamar;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
@@ -62,7 +66,7 @@ namespace Samples
     // SAMPLE: StopwatchAttribute
     public class StopwatchAttribute : ModifyChainAttribute
     {
-        public override void Modify(IChain chain, GenerationRules rules)
+        public override void Modify(IChain chain, GenerationRules rules, IContainer container)
         {
             chain.Middleware.Add(new StopwatchFrame(chain));
         }
@@ -95,7 +99,7 @@ namespace Samples
 
     public class PutStopwatchOnHandlers : IHandlerPolicy
     {
-        public void Apply(HandlerGraph graph, GenerationRules rules)
+        public void Apply(HandlerGraph graph, GenerationRules rules, IContainer container)
         {
             // We're adding the StopwatchFrame to all message types,
             // but we *could* filter the application
@@ -103,7 +107,7 @@ namespace Samples
         }
     }
 
-    public class StopwatchMonitoredApp : JasperRegistry
+    public class StopwatchMonitoredApp : JasperOptions
     {
         public StopwatchMonitoredApp()
         {

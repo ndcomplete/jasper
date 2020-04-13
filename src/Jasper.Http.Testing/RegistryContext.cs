@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Alba;
+using Baseline;
+using Jasper;
+using Jasper.Runtime.Handlers;
 using Lamar;
+using Microsoft.Extensions.DependencyInjection;
+using TestingSupport;
 using Xunit;
 
 namespace HttpTests
 {
-    public class BasicAppNoHandling : JasperRegistry
+    public class BasicAppNoHandling : JasperOptions
     {
         public BasicAppNoHandling()
         {
@@ -20,7 +26,7 @@ namespace HttpTests
     }
 
 
-    public class RegistryFixture<T> : IDisposable where T : JasperRegistry, new()
+    public class RegistryFixture<T> : IDisposable where T : JasperOptions, new()
     {
         private readonly Lazy<SystemUnderTest> _sut = new Lazy<SystemUnderTest>(() =>
         {
@@ -45,7 +51,7 @@ namespace HttpTests
     }
 
     [Collection("integration")]
-    public class RegistryContext<T> : IClassFixture<RegistryFixture<T>> where T : JasperRegistry, new()
+    public class RegistryContext<T> : IClassFixture<RegistryFixture<T>> where T : JasperOptions, new()
     {
         private readonly RegistryFixture<T> _fixture;
 

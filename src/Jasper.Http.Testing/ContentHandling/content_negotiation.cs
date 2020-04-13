@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Alba;
 using Baseline;
+using Jasper;
 using Jasper.Util;
 using JasperHttp.ContentHandling;
 using Microsoft.AspNetCore.Http;
+using Shouldly;
+using TestingSupport;
 using Xunit;
 
 namespace HttpTests.ContentHandling
 {
-    public class ConnegRegistry : JasperRegistry
+    public class ConnegRegistry : JasperOptions
     {
         public ConnegRegistry()
         {
