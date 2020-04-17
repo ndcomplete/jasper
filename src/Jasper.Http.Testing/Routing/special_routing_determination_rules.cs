@@ -10,19 +10,19 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void homeendpoint()
         {
-            RouteBuilder.Build<HomeEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
-            RouteBuilder.Build<HomeEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
-            RouteBuilder.Build<HomeEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
-            RouteBuilder.Build<HomeEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
+            Route.Build<HomeEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
+            Route.Build<HomeEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
+            Route.Build<HomeEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
+            Route.Build<HomeEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
         }
 
         [Fact]
         public void serviceendpoint()
         {
-            RouteBuilder.Build<ServiceEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
-            RouteBuilder.Build<ServiceEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
-            RouteBuilder.Build<ServiceEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
-            RouteBuilder.Build<ServiceEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
+            Route.Build<ServiceEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
+            Route.Build<ServiceEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
+            Route.Build<ServiceEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
+            Route.Build<ServiceEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
         }
     }
 

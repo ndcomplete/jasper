@@ -36,12 +36,12 @@ namespace Jasper.Http.Model
             TypeName =
                 $"{Action.HandlerType.FullNameInCode().Replace(".", "_")}_{action.Method.Name}_{action.Method.GetParameters().Select(x => x.Name).Join("_")}";
 
-            InputType = RouteBuilder.DetermineInputType(action.Method);
+            InputType = route.InputType;
             ResourceType = action.ReturnVariable?.VariableType;
 
         }
 
-        public RouteChain(MethodCall action) : this(action, RouteBuilder.Build(action.HandlerType, action.Method))
+        public RouteChain(MethodCall action) : this(action, Route.Build(action.HandlerType, action.Method))
         {
         }
 
