@@ -24,7 +24,7 @@ namespace Jasper.Http
 
         public ServiceFamily Build(Type type, ServiceGraph serviceGraph)
         {
-            if (type.IsConcrete() && _routes.IsSealed() && matches(type))
+            if (type.IsConcrete() && matches(type))
             {
                 var instance = new ConstructorInstance(type, type, ServiceLifetime.Scoped);
                 return new ServiceFamily(type, new IDecoratorPolicy[0], instance);

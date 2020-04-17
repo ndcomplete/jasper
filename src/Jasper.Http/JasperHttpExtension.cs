@@ -20,7 +20,6 @@ namespace Jasper.Http
             registry.Services.AddSingleton(options);
 
             registry.Services.ForConcreteType<ConnegRules>().Configure.Singleton();
-            registry.Services.For<IHttpContextAccessor>().Use(x => new HttpContextAccessor());
             registry.Services.AddSingleton(options.Routes);
 
             registry.Services.ForSingletonOf<IUrlRegistry>().Use(options.Urls);

@@ -7,10 +7,10 @@ namespace Jasper.Http.Routing
         int Position { get; }
 
         string SegmentPath { get; }
-        string CanonicalPath();
         string SegmentFromModel(object model);
 
         string ReadRouteDataFromMethodArguments(List<object> arguments);
         string SegmentFromParameters(IDictionary<string, object> parameters);
+        string RoutePatternPath();
     }
 }

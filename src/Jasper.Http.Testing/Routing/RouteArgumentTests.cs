@@ -44,13 +44,6 @@ namespace Jasper.Http.Testing.Routing
             parameter.ArgType.ShouldBe(typeof(int));
         }
 
-        [Fact]
-        public void canonical_path()
-        {
-            var parameter = new RouteArgument("foo", 1);
-            parameter.CanonicalPath().ShouldBe("*");
-        }
-
 
         [Fact]
         public void create_route_parsing_frame_from_string_argument()

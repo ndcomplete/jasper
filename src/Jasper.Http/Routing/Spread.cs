@@ -23,11 +23,6 @@ namespace Jasper.Http.Routing
 
         public int Position { get; }
 
-        public string CanonicalPath()
-        {
-            return string.Empty;
-        }
-
         public string SegmentPath { get; } = "...";
 
         public string SegmentFromModel(object model)
@@ -43,6 +38,11 @@ namespace Jasper.Http.Routing
         public string SegmentFromParameters(IDictionary<string, object> parameters)
         {
             throw new NotSupportedException();
+        }
+
+        public string RoutePatternPath()
+        {
+            throw new NotImplementedException();
         }
 
         private string[] getSpreadData(string[] segments)

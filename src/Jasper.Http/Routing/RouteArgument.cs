@@ -133,11 +133,6 @@ namespace Jasper.Http.Routing
 
         public int Position { get; }
 
-        public string CanonicalPath()
-        {
-            return "*";
-        }
-
         public string SegmentPath => ":" + Key;
 
         public string SegmentFromModel(object model)
@@ -155,6 +150,11 @@ namespace Jasper.Http.Routing
             if (!parameters.ContainsKey(Key)) throw new UrlResolutionException($"Missing required parameter '{Key}'");
 
             return parameters[Key].ToString();
+        }
+
+        public string RoutePatternPath()
+        {
+            return $"{{{Key}}}";
         }
 
         public void MapToField<T>(string fieldName)

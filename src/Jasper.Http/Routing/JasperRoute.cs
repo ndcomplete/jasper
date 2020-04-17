@@ -5,10 +5,12 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Baseline;
 using Baseline.Reflection;
-using Jasper.Http.Model;
 using Jasper.Http.Routing.Codegen;
 using Jasper.Util;
 using LamarCodeGeneration;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Routing.Patterns;
+using RouteHandler = Jasper.Http.Model.RouteHandler;
 
 namespace Jasper.Http.Routing
 {
@@ -259,15 +261,16 @@ namespace Jasper.Http.Routing
             return "/" + Segments.Select(x => x.SegmentFromParameters(parameters)).Join("/");
         }
 
-        // public string RoutePatternString()
-        // {
-        //     return "/" + _segments.Select(x => x.PatternPath()).Join('/');
-        // }
-        //
-        // public RoutePattern BuildRoutePattern()
-        // {
-        //     return RoutePatternFactory.Parse(RoutePatternString());
-        // }
+        public string RoutePatternString()
+        {
+            return "/" + Segments.Select(x => x.RoutePatternPath()).Join("/");
+        }
+
+        // TODO -- not tested, not sure this is actually usable
+        public RoutePattern BuildRoutePattern()
+        {
+            return RoutePatternFactory.Parse(RoutePatternString());
+        }
 
     }
 }

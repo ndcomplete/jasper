@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Threading.Tasks;
 using Baseline;
 using Baseline.Reflection;
+using BaselineTypeDiscovery;
+using Jasper.Http.ContentHandling;
+using Lamar;
+using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
+using LamarCodeGeneration.Model;
 
 namespace Jasper.Http.Model
 {
-    public class RouteGraph : IEnumerable<RouteChain>
+    public class RouteGraph : IGeneratesCode, IEnumerable<RouteChain>
     {
         public static readonly string Context = "httpContext";
 
@@ -56,6 +63,8 @@ namespace Jasper.Http.Model
         /// </summary>
         public IEnumerable<RouteChain> Commands => Posts.Union(Puts).Union(Deletes);
 
+        internal IContainer Container { get; set; }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -65,6 +74,42 @@ namespace Jasper.Http.Model
         {
             return _chains.GetEnumerator();
         }
+
+        public IServiceVariableSource AssemblyTypes(GenerationRules rules, GeneratedAssembly assembly)
+        {
+            if (Container == null)
+                throw new InvalidOperationException(
+                    "The Container property needs to be set before this is a valid operation");
+
+            // This has to be built by the container because of the
+            // discovery of readers/writers/serializers
+            var conneg = Container.GetInstance<ConnegRules>();
+
+            foreach (var chain in _chains) chain.AssemblyType(assembly, conneg, rules, Container);
+
+            return Container.CreateServiceVariableSource();
+        }
+
+        public async Task AttachPreBuiltTypes(GenerationRules rules, Assembly assembly, IServiceProvider services)
+        {
+            var typeSet = await TypeRepository.ForAssembly(assembly);
+            var handlerTypes = typeSet.ClosedTypes.Concretes.Where(x => x.CanBeCastTo<RouteHandler>()).ToArray();
+
+            var container = (IContainer) services;
+
+            foreach (var chain in _chains) chain.AttachPreBuiltHandler(rules, container, handlerTypes);
+        }
+
+        public Task AttachGeneratedTypes(GenerationRules rules, IServiceProvider services)
+        {
+            var container = (IContainer) services;
+
+            foreach (var chain in _chains) chain.CreateHandler(container);
+
+            return Task.CompletedTask;
+        }
+
+        public string CodeType { get; } = "Routes";
 
         public RouteChain AddRoute(MethodCall methodCall)
         {
@@ -92,24 +137,6 @@ namespace Jasper.Http.Model
             if (duplicates.Length == 1) throw duplicates[0];
 
             if (duplicates.Any()) throw new AggregateException(duplicates);
-        }
-
-        internal void Seal()
-        {
-            _sealed = true;
-        }
-
-        internal bool IsSealed()
-        {
-            return _sealed;
-        }
-    }
-
-    public class DuplicateRoutesException : Exception
-    {
-        public DuplicateRoutesException(IEnumerable<RouteChain> chains) : base(
-            $"Duplicated route with pattern {chains.First().Route.Name} between {chains.Select(x => $"{x.Action}").Join(", ")}")
-        {
         }
     }
 }

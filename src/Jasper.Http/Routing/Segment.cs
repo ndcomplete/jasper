@@ -14,11 +14,6 @@ namespace Jasper.Http.Routing
         public string Path { get; }
         public int Position { get; }
 
-        public string CanonicalPath()
-        {
-            return Path;
-        }
-
         public string SegmentPath { get; }
 
         public string SegmentFromModel(object model)
@@ -32,6 +27,11 @@ namespace Jasper.Http.Routing
         }
 
         public string SegmentFromParameters(IDictionary<string, object> parameters)
+        {
+            return Path;
+        }
+
+        public string RoutePatternPath()
         {
             return Path;
         }

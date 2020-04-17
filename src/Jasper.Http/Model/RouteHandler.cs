@@ -25,9 +25,8 @@ namespace Jasper.Http.Model
         ///     Handles the actual HTTP request
         /// </summary>
         /// <param name="httpContext"></param>
-        /// <param name="segments"></param>
         /// <returns></returns>
-        public abstract Task Handle(HttpContext httpContext, string[] segments);
+        public abstract Task Handle(HttpContext httpContext);
 
 
         public Task UseWriter(object model, HttpResponse response)

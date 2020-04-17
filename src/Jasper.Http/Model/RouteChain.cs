@@ -14,6 +14,7 @@ using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace Jasper.Http.Model
 {
@@ -156,6 +157,13 @@ namespace Jasper.Http.Model
         public RouteHandler CreateHandler(IContainer container)
         {
             var handler = container.QuickBuild(_generatedType.CompiledType).As<RouteHandler>();
+            connectHandler(handler);
+
+            return handler;
+        }
+
+        private void connectHandler(RouteHandler handler)
+        {
             handler.Chain = this;
             Route.Handler = handler;
 
@@ -163,8 +171,6 @@ namespace Jasper.Http.Model
             handler.Writer = Writer;
             handler.ConnegReader = ConnegReader;
             handler.ConnegWriter = ConnegWriter;
-
-            return handler;
         }
 
 
@@ -172,6 +178,28 @@ namespace Jasper.Http.Model
         {
             return Action.Method.GetParameters()
                 .Any(x => x.ParameterType == typeof(IMessageContext));
+        }
+
+        public void AttachPreBuiltHandler(GenerationRules rules, IContainer container, Type[] handlerTypes)
+        {
+            var fullName = $"{rules.ApplicationNamespace}.{TypeName}";
+            var handlerType = handlerTypes.FirstOrDefault(x => x.FullName == fullName);
+
+            if (handlerType == null) return;
+
+            var handler = (RouteHandler) container.QuickBuild(handlerType);
+            connectHandler(handler);
+        }
+
+        public RouteEndpoint BuildEndpoint(IContainer container)
+        {
+            var handler = CreateHandler(container);
+            var pattern = Route.BuildRoutePattern();
+
+            // TODO -- do more to pick up attributes here like [Authorize] and [AllowAnonymous]
+            // TODO -- add HttpMethod constraints
+            var metadata = new EndpointMetadataCollection();
+            return new RouteEndpoint(c => handler.Handle(c), pattern, Route.Order, metadata, Route.Description);
         }
     }
 }
