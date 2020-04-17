@@ -12,24 +12,23 @@ using Xunit;
 
 namespace Jasper.Http.Testing.ContentHandling
 {
-    public class ConnegRegistry : JasperOptions
+    public class ConnegOptions : JasperOptions
     {
-        public ConnegRegistry()
+        public ConnegOptions()
         {
             Handlers.DisableConventionalDiscovery();
-            throw new NotImplementedException("redo");
-            //Settings.Http(x => x.IncludeType<CustomReaderWriterEndpoint>());
+
+            Extensions.ConfigureHttp(x => x.IncludeType<CustomReaderWriterEndpoint>());
 
             Services.For<IRequestReader>().Add<XmlReader<SpecialInput>>();
             Services.For<IResponseWriter>().Add<XmlWriter<SpecialOutput>>();
 
-            //Hosting(x => x.Configure(app => app.UseJasper()));
         }
     }
 
-    public class content_negotiation : RegistryContext<ConnegRegistry>
+    public class content_negotiation : RegistryContext<ConnegOptions>
     {
-        public content_negotiation(RegistryFixture<ConnegRegistry> fixture) : base(fixture)
+        public content_negotiation(RegistryFixture<ConnegOptions> fixture) : base(fixture)
         {
         }
 

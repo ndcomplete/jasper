@@ -5,10 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Shouldly;
 using Xunit;
@@ -20,25 +22,20 @@ namespace Jasper.Http.Testing.Kestrel
     {
         public DefaultApp()
         {
-            throw new NotImplementedException("redo");
-//            Host = WebHost.CreateDefaultBuilder()
-//                .UseKestrel(o => o.ListenLocalhost(5025))
-//                .UseUrls("http://localhost:5025")
-//
-//                .UseStartup<Startup>()
-//
-//                .UseJasper(x =>
-//                {
-//                    x.Http(opts => opts
-//                        .DisableConventionalDiscovery()
-//                        .IncludeType<HomeEndpointGuy>()
-//                        .IncludeType<UserController>());
-//
-//                    x.Services.AddSingleton(new UserRepository());
-//                }).Start();
+            Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
+                .UseJasper(x => x.Services.AddSingleton(new UserRepository()))
+                .ConfigureWebHostDefaults(web =>
+                {
+                    web.UseKestrel(o => o.ListenLocalhost(5025));
+                    web.UseUrls("http://localhost:5025");
+                    web.UseStartup<Startup>();
+
+
+                })
+                .Start();
         }
 
-        public IWebHost Host { get; }
+        public IHost Host { get; }
 
         public void Dispose()
         {
@@ -54,6 +51,8 @@ namespace Jasper.Http.Testing.Kestrel
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
+            app.UseEndpoints(x => x.MapJasperEndpoints());
         }
     }
 

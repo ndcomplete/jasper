@@ -18,12 +18,6 @@ namespace Jasper.Http.Testing.Model
             theSource.Create(typeof(T)).VariableType.ShouldBe(typeof(T));
         }
 
-        [Fact]
-        public void can_find_authentication_manager()
-        {
-
-            matchesAndCanCreate<AuthenticationManager>();
-        }
 
         [Fact]
         public void can_find_cancellation_token()

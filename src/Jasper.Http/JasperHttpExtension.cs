@@ -16,23 +16,23 @@ namespace Jasper.Http
     {
         public void Configure(JasperOptions registry)
         {
-            var options = new JasperHttpOptions();
-            registry.Services.AddSingleton(options);
+            registry.Services.AddSingleton(Options);
+
 
             registry.Services.ForConcreteType<ConnegRules>().Configure.Singleton();
-            registry.Services.AddSingleton(options.Routes);
+            registry.Services.AddSingleton(Options.Routes);
 
-            registry.Services.ForSingletonOf<IUrlRegistry>().Use(options.Urls);
+            registry.Services.ForSingletonOf<IUrlRegistry>().Use(Options.Urls);
 
 
-            registry.Services.Policies.Add(new RouteScopingPolicy(options.Routes));
+            registry.Services.Policies.Add(new RouteScopingPolicy(Options.Routes));
 
             // SAMPLE: applying-route-policy
             // Applying a global policy
-            options.GlobalPolicy<ControllerUsagePolicy>();
+            Options.GlobalPolicy<ControllerUsagePolicy>();
 
-            options.IncludeTypes(x => x.CanBeCastTo<ControllerBase>());
-            options.IncludeMethods(x => x.HasAttribute<HttpMethodAttribute>());
+            Options.IncludeTypes(x => x.CanBeCastTo<ControllerBase>());
+            Options.IncludeMethods(x => x.HasAttribute<HttpMethodAttribute>());
 
             registry.Services.Scan(x =>
             {
@@ -53,5 +53,7 @@ namespace Jasper.Http
 
             JasperRoute.Rules.Insert(0, new HttpAttributeRoutingRule());
         }
+
+        public JasperHttpOptions Options { get; } = new JasperHttpOptions();
     }
 }

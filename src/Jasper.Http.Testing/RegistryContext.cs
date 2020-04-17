@@ -4,7 +4,10 @@ using Alba;
 using Baseline;
 using Jasper.Runtime.Handlers;
 using Lamar;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using TestingSupport;
 using Xunit;
 
@@ -24,16 +27,29 @@ namespace Jasper.Http.Testing
         }
     }
 
+    public class JasperTestStartup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+
+        }
+
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseRouting();
+            app.UseEndpoints(x => x.MapJasperEndpoints());
+        }
+    }
 
     public class RegistryFixture<T> : IDisposable where T : JasperOptions, new()
     {
         private readonly Lazy<SystemUnderTest> _sut = new Lazy<SystemUnderTest>(() =>
         {
-            throw new NotImplementedException("redo");
-//            var system = JasperAlba.For<T>();
-//            system.Services.As<Container>().DisposalLock = DisposalLock.ThrowOnDispose;
-//
-//            return system;
+            var builder = Host.CreateDefaultBuilder()
+                .UseJasper<T>()
+                .ConfigureWebHostDefaults(x => x.UseStartup<JasperTestStartup>());
+
+            return new SystemUnderTest(builder);
         });
 
         public SystemUnderTest System => _sut.Value;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Lamar;
@@ -14,10 +15,12 @@ namespace Jasper.Http
     public class JasperRouteEndpointSource : EndpointDataSource
     {
         private readonly IContainer _container;
+        private readonly Action<JasperHttpOptions> _customization;
         private Endpoint[] _endpoints;
-        public JasperRouteEndpointSource(IContainer container)
+        public JasperRouteEndpointSource(IContainer container, Action<JasperHttpOptions> customization)
         {
             _container = container;
+            _customization = customization;
         }
 
         public override IChangeToken GetChangeToken()
@@ -30,8 +33,7 @@ namespace Jasper.Http
         private IEnumerable<Endpoint> BuildEndpoints()
         {
             var builder = _container.QuickBuild<RouteBuilder>();
-            // TODO -- there may be some extra configuration on JasperHttpOptions
-            return builder.BuildEndpoints();
+            return builder.BuildEndpoints(_customization);
         }
 
         internal class RouteBuilder
@@ -47,10 +49,13 @@ namespace Jasper.Http
                 _options = options;
             }
 
-            public IEnumerable<Endpoint> BuildEndpoints()
+            public IEnumerable<Endpoint> BuildEndpoints(Action<JasperHttpOptions> customization)
             {
                 var graph = _httpOptions.Routes;
                 graph.Container = _container;
+
+                // One time customization
+                customization?.Invoke(_httpOptions);
 
                 var actions = _httpOptions.FindActions(_options.ApplicationAssembly).GetAwaiter().GetResult();
 

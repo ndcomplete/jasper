@@ -4,8 +4,10 @@ using Alba;
 using Jasper.Http.Model;
 using Jasper.Http.Routing;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Shouldly;
 using Xunit;
 
@@ -15,19 +17,25 @@ namespace Jasper.Http.Testing.Routing
     {
         public SampleAppWithRoutedAttributes()
         {
-            throw new NotImplementedException("redo");
-//            System = SystemUnderTest.For(x => x.UseStartup<Startup>().UseJasper(_ =>
-//            {
-//                _.Http(opts =>
-//                {
-//                    opts.DisableConventionalDiscovery()
-//                        .IncludeType<AttributeUsingEndpointClass>()
-//                        .IncludeType<IdiomaticJasperRouteEndpoint>();
-//                });
-//            }));
-//
-//
-//            Routes = System.Services.GetRequiredService<RouteGraph>();
+            var builder = Host.CreateDefaultBuilder()
+                .UseJasper(x =>
+                {
+                    x.Extensions.ConfigureHttp(opts =>
+                    {
+                        opts.DisableConventionalDiscovery()
+                            .IncludeType<AttributeUsingEndpointClass>()
+                            .IncludeType<IdiomaticJasperRouteEndpoint>();
+                    });
+                })
+                .ConfigureWebHostDefaults(web =>
+                {
+                    web.UseStartup<JasperTestStartup>();
+                });
+
+            System = new SystemUnderTest(builder);
+
+
+            Routes = System.Services.GetRequiredService<RouteGraph>();
         }
 
         public RouteGraph Routes { get; set; }

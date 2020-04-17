@@ -8,13 +8,13 @@ namespace Jasper.Http.Testing.Routing
         public RoutingApp()
         {
             Handlers.DisableConventionalDiscovery();
-            throw new NotImplementedException("redo");
-//            Settings.Http(x =>
-//            {
-//                x.DisableConventionalDiscovery()
-//                    .IncludeType<SpreadHttpActions>()
-//                    .IncludeType<RouteEndpoints>();
-//            });
+
+            Extensions.ConfigureHttp(x =>
+            {
+                x.DisableConventionalDiscovery()
+                    .IncludeType<SpreadHttpActions>()
+                    .IncludeType<RouteEndpoints>();
+            });
         }
     }
 }

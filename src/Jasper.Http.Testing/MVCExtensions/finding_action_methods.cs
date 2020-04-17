@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Shouldly;
 using Xunit;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Jasper.Http.Testing.MVCExtensions
 {
@@ -17,10 +19,16 @@ namespace Jasper.Http.Testing.MVCExtensions
     {
         public MvcExtendedApp()
         {
-            throw new NotImplementedException("redo");
-//            System = SystemUnderTest.For(x => x.UseStartup<Startup>().UseJasper());
-//
-//            Routes = System.Services.GetRequiredService<RouteGraph>();
+            var builder = Host.CreateDefaultBuilder()
+                .UseJasper()
+                .ConfigureWebHostDefaults(x =>
+                {
+                    x.UseStartup<Startup>();
+                });
+
+            System = new SystemUnderTest(builder);
+
+            Routes = System.Services.GetRequiredService<RouteGraph>();
         }
 
         public RouteGraph Routes { get; set; }
@@ -46,15 +54,18 @@ namespace Jasper.Http.Testing.MVCExtensions
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            throw new NotImplementedException("redo");
-            //app.UseJasper();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(x =>
+            {
+                x.MapControllers();
+                x.MapJasperEndpoints();
+            });
         }
     }
 

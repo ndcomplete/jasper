@@ -134,8 +134,7 @@ namespace Jasper.Http.Testing
     {
         public void Configure(JasperOptions registry)
         {
-            throw new NotImplementedException("redo");
-            //registry.Http(x => x.IncludeType<ExtensionThing>());
+            registry.Extensions.ConfigureHttp(x => x.IncludeType<ExtensionThing>());
         }
     }
 
