@@ -18,7 +18,11 @@ namespace Jasper.Http.Testing.ContentHandling
         {
             Handlers.DisableConventionalDiscovery();
 
-            Extensions.ConfigureHttp(x => x.IncludeType<CustomReaderWriterEndpoint>());
+            Extensions.ConfigureHttp(x =>
+            {
+                x.IncludeType<CustomReaderWriterEndpoint>();
+                x.DisableConventionalDiscovery();
+            });
 
             Services.For<IRequestReader>().Add<XmlReader<SpecialInput>>();
             Services.For<IResponseWriter>().Add<XmlWriter<SpecialOutput>>();

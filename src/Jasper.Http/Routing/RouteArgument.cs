@@ -15,6 +15,7 @@ namespace Jasper.Http.Routing
     public interface IRoutingFrameSource
     {
         Frame ToParsingFrame(MethodCall action);
+        ParameterInfo Parameter { get; }
     }
 
     public class RouteArgument : ISegment, IRoutingFrameSource
@@ -26,7 +27,6 @@ namespace Jasper.Http.Routing
         private Func<string, object> _converter = x => x;
         private MemberInfo _mappedMember;
 
-        private ParameterInfo _parameter;
         private Func<object, object> _readData = x => null;
         private Action<object, object> _writeData = (x, y) => { };
 
@@ -49,23 +49,20 @@ namespace Jasper.Http.Routing
             Position = position;
         }
 
-        public RouteArgument(MemberInfo member, int position)
-        {
-            Position = position;
-            MappedMember = member;
-        }
+        public ParameterInfo Parameter { get; private set; }
+
 
         public string Key { get; private set; }
 
         public ParameterInfo MappedParameter
         {
-            get => _parameter;
+            get => Parameter;
             set
             {
                 if (value == null) throw new ArgumentNullException(nameof(value));
 
                 Key = value.Name;
-                _parameter = value;
+                Parameter = value;
                 ArgType = value.ParameterType;
             }
         }
@@ -120,6 +117,12 @@ namespace Jasper.Http.Routing
 
         public Frame ToParsingFrame(MethodCall action)
         {
+            if (Parameter == null)
+            {
+                Parameter = action.Method.GetParameters().FirstOrDefault(x => x.Name == Key);
+                ArgType = Parameter?.ParameterType;
+            }
+
             if (ArgType == null) throw new InvalidOperationException($"Missing an {nameof(ArgType)} value");
 
 
@@ -142,7 +145,7 @@ namespace Jasper.Http.Routing
 
         public string ReadRouteDataFromMethodArguments(List<object> arguments)
         {
-            return _parameter == null ? string.Empty : WebUtility.UrlEncode(arguments[_parameter.Position].ToString());
+            return Parameter == null ? string.Empty : WebUtility.UrlEncode(arguments[Parameter.Position].ToString());
         }
 
         public string SegmentFromParameters(IDictionary<string, object> parameters)

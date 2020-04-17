@@ -9,8 +9,6 @@ namespace Jasper.Http.Routing.Codegen
 {
     public class ParsedRouteArgumentFrame : RouteArgumentFrame
     {
-        private Variable _segments;
-
         public ParsedRouteArgumentFrame(Type type, string name, int position) : base(name, position, type)
         {
         }
@@ -19,7 +17,7 @@ namespace Jasper.Http.Routing.Codegen
         {
             var alias = RoutingFrames.TypeOutputs[Variable.VariableType];
             writer.WriteLine($"{alias} {Variable.Usage};");
-            writer.Write($"BLOCK:if (!{alias}.TryParse({_segments.Usage}[{Position}], out {Variable.Usage}))");
+            writer.Write($"BLOCK:if (!{alias}.TryParse({Context.Usage}.Request.RouteValues[\"{Variable.Usage}\"], out {Variable.Usage}))");
             writer.WriteLine(
                 $"{RouteGraph.Context}.{nameof(HttpContext.Response)}.{nameof(HttpResponse.StatusCode)} = 400;");
             writer.WriteLine(method.ToExitStatement());
@@ -29,10 +27,5 @@ namespace Jasper.Http.Routing.Codegen
             Next?.GenerateCode(method, writer);
         }
 
-        public override IEnumerable<Variable> FindVariables(IMethodVariables chain)
-        {
-            _segments = chain.FindVariableByName(typeof(string[]), RoutingFrames.Segments);
-            yield return _segments;
-        }
     }
 }

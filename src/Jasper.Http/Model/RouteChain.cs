@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -139,7 +140,17 @@ namespace Jasper.Http.Model
 
             var list = Middleware.ToList();
 
-            list.AddRange(Route.Segments.OfType<IRoutingFrameSource>().Select(x => x.ToParsingFrame(Action)));
+            var arguments = Route.Segments.OfType<IRoutingFrameSource>();
+            foreach (var argument in arguments)
+            {
+                if (Action.Method.Name == "Put" && Action.HandlerType.Name == "ValuesController")
+                {
+                    Debug.Assert(true);
+                }
+
+                var frame = argument.ToParsingFrame(Action);
+                list.Add(frame);
+            }
 
 
             list.Add(Action);

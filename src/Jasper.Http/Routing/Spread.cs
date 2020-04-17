@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Jasper.Http.Routing.Codegen;
 using LamarCodeGeneration.Frames;
 
@@ -8,9 +9,10 @@ namespace Jasper.Http.Routing
 {
     public class Spread : ISegment, IRoutingFrameSource
     {
-        public Spread(int position)
+        public Spread(int position, ParameterInfo parameter)
         {
             Position = position;
+            Parameter = parameter;
         }
 
         public Frame ToParsingFrame(MethodCall action)
@@ -21,7 +23,10 @@ namespace Jasper.Http.Routing
                 : new RelativePathFrame(Position);
         }
 
+
+
         public int Position { get; }
+        public ParameterInfo Parameter { get; }
 
         public string SegmentPath { get; } = "...";
 
@@ -43,17 +48,6 @@ namespace Jasper.Http.Routing
         public string RoutePatternPath()
         {
             throw new NotImplementedException();
-        }
-
-        private string[] getSpreadData(string[] segments)
-        {
-            if (segments.Length == 0) return new string[0];
-
-            if (Position == 0) return segments;
-
-            if (Position > segments.Length - 1) return new string[0];
-
-            return segments.Skip(Position).ToArray();
         }
 
         public override string ToString()

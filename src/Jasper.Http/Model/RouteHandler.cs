@@ -28,7 +28,6 @@ namespace Jasper.Http.Model
         /// <returns></returns>
         public abstract Task Handle(HttpContext httpContext);
 
-
         public Task UseWriter(object model, HttpResponse response)
         {
             var writer = Writer;

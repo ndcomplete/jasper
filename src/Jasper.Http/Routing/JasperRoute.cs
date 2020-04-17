@@ -79,7 +79,7 @@ namespace Jasper.Http.Routing
                     $"An HTTP action method can only take in either '{JasperRoute.PathSegments}' or '{JasperRoute.RelativePath}', but not both. Error with action {handlerType.FullName}.{method.Name}()");
 
             var segments = route.Segments;
-            if (spreads.Length == 1) segments = segments.Concat(new ISegment[] {new Spread(segments.Count)}).ToList();
+            if (spreads.Length == 1) segments = segments.Concat(new ISegment[] {new Spread(segments.Count, spreads.Single())}).ToList();
 
             method.ForAttribute<RouteNameAttribute>(att => route.Name = att.Name);
 
@@ -183,7 +183,7 @@ namespace Jasper.Http.Routing
 
         public static ISegment ToParameter(string path, int position)
         {
-            if (path == "...") return new Spread(position);
+            if (path == "...") return new Spread(position, null);
 
             if (path.StartsWith(":"))
             {

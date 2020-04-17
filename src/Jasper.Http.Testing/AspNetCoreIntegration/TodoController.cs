@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Jasper.Attributes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Jasper.Http.Testing.AspNetCoreIntegration
 {
@@ -23,11 +24,13 @@ namespace Jasper.Http.Testing.AspNetCoreIntegration
         }
 
         // PUT api/values/5
+        [JasperIgnore]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/values/5
+        [JasperIgnore]
         public void Delete(int id)
         {
         }

@@ -6,6 +6,7 @@ using LamarCodeGeneration;
 using LamarCompiler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
 namespace Jasper.Http
@@ -25,7 +26,7 @@ namespace Jasper.Http
 
         public override IChangeToken GetChangeToken()
         {
-            return null;
+            return NullChangeToken.Singleton;
         }
 
         public override IReadOnlyList<Endpoint> Endpoints => _endpoints ?? (_endpoints = BuildEndpoints().ToArray());
