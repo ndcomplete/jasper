@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Baseline;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     public class RoutePattern
     {

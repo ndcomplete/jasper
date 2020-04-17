@@ -8,7 +8,7 @@ using BaselineTypeDiscovery;
 using Jasper.Util;
 using LamarCodeGeneration.Frames;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     public partial class JasperHttpOptions
     {

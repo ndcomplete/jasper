@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Baseline;
 using Shouldly;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public static class SpecificationExtensions
     {

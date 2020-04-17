@@ -1,11 +1,10 @@
 ﻿using System;
-using Jasper;
 using Lamar;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.AspNetCoreIntegration
+namespace Jasper.Http.Testing.AspNetCoreIntegration
 {
     public class service_registrations_with_aspnet_core_abstractions
     {

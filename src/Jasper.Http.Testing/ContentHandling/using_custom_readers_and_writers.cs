@@ -3,12 +3,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Alba;
 using Baseline;
+using Jasper.Http.ContentHandling;
 using Jasper.Util;
-using JasperHttp.ContentHandling;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
-namespace HttpTests.ContentHandling
+namespace Jasper.Http.Testing.ContentHandling
 {
     public class using_custom_readers_and_writers : RegistryContext<HttpTestingApp>
     {

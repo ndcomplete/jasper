@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using JasperHttp.Routing;
+using Jasper.Http.Routing;
 using Xunit;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class MethodCallParserTests
     {

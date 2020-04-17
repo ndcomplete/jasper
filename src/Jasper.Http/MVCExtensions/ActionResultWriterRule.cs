@@ -1,9 +1,9 @@
 using Baseline;
-using JasperHttp.ContentHandling;
-using JasperHttp.Model;
+using Jasper.Http.ContentHandling;
+using Jasper.Http.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JasperHttp.MVCExtensions
+namespace Jasper.Http.MVCExtensions
 {
     public class ActionResultWriterRule : IWriterRule
     {

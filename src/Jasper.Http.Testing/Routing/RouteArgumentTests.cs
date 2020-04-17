@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Baseline.Reflection;
-using JasperHttp.Routing;
-using JasperHttp.Routing.Codegen;
+using Jasper.Http.Routing;
+using Jasper.Http.Routing.Codegen;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class RouteArgumentTests
     {

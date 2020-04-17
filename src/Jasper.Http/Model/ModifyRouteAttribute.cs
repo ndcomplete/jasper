@@ -2,7 +2,7 @@
 using Jasper.Configuration;
 using LamarCodeGeneration;
 
-namespace JasperHttp.Model
+namespace Jasper.Http.Model
 {
     /// <summary>
     ///     Base class for custom attributes that modify route configurations

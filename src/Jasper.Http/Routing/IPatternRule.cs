@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     public interface IPatternRule
     {

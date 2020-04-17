@@ -1,7 +1,7 @@
 ﻿using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 
-namespace JasperHttp.ContentHandling
+namespace Jasper.Http.ContentHandling
 {
     public class CheckForMissing : IfBlock
     {

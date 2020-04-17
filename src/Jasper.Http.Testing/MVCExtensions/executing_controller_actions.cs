@@ -9,7 +9,7 @@ using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace HttpTests.MVCExtensions
+namespace Jasper.Http.Testing.MVCExtensions
 {
     public class executing_controller_actions : IClassFixture<MvcExtendedApp>
     {

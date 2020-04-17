@@ -5,7 +5,7 @@ using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JasperHttp.MVCExtensions
+namespace Jasper.Http.MVCExtensions
 {
     public class SetControllerContextFrame : SyncFrame
     {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JasperHttp.Routing.Codegen;
+using Jasper.Http.Routing.Codegen;
 using LamarCodeGeneration.Frames;
-using Microsoft.AspNetCore.Http;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     public class Spread : ISegment, IRoutingFrameSource
     {

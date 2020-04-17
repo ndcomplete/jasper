@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     public class MethodCallParser : ExpressionVisitor
     {

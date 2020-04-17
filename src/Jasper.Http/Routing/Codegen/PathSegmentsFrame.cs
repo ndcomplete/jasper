@@ -1,7 +1,7 @@
-﻿using JasperHttp.Model;
+﻿using Jasper.Http.Model;
 using LamarCodeGeneration;
 
-namespace JasperHttp.Routing.Codegen
+namespace Jasper.Http.Routing.Codegen
 {
     public class PathSegmentsFrame : RouteArgumentFrame
     {

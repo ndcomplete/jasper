@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using Alba;
-using JasperHttp.Model;
-using JasperHttp.Routing;
+using Jasper.Http.Model;
+using Jasper.Http.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.MVCExtensions
+namespace Jasper.Http.Testing.MVCExtensions
 {
     public class MvcExtendedApp : IDisposable
     {

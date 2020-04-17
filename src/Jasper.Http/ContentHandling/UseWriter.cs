@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using Baseline.Reflection;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using LamarCodeGeneration.Frames;
 
-namespace JasperHttp.ContentHandling
+namespace Jasper.Http.ContentHandling
 {
     public class UseWriter : MethodCall
     {

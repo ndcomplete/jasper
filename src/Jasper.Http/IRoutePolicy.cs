@@ -1,7 +1,7 @@
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using LamarCodeGeneration;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     // SAMPLE: IRoutePolicy
     /// <summary>

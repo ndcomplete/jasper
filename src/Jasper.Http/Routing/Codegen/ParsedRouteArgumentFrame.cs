@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Model;
 using Microsoft.AspNetCore.Http;
 
-namespace JasperHttp.Routing.Codegen
+namespace Jasper.Http.Routing.Codegen
 {
     public class ParsedRouteArgumentFrame : RouteArgumentFrame
     {

@@ -3,7 +3,7 @@ using System.Reflection;
 using Baseline.Reflection;
 using Jasper.Util;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     internal class ActionMethodFilter : CompositeFilter<MethodInfo>
     {

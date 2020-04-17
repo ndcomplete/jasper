@@ -1,8 +1,7 @@
 ﻿using System;
-using Jasper;
 using TestingSupport;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class RoutingApp : JasperOptions
     {

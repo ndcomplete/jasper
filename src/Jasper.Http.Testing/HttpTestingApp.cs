@@ -1,6 +1,4 @@
-﻿using Jasper;
-
-namespace HttpTests
+﻿namespace Jasper.Http.Testing
 {
     public class HttpTestingApp : JasperOptions
     {

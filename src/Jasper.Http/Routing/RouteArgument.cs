@@ -7,10 +7,10 @@ using System.Reflection;
 using Baseline;
 using Baseline.Conversion;
 using Baseline.Reflection;
-using JasperHttp.Routing.Codegen;
+using Jasper.Http.Routing.Codegen;
 using LamarCodeGeneration.Frames;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     public interface IRoutingFrameSource
     {

@@ -1,10 +1,10 @@
 using System.Linq;
 using Baseline;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using LamarCodeGeneration;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JasperHttp.MVCExtensions
+namespace Jasper.Http.MVCExtensions
 {
     // SAMPLE: ControllerUsagePolicy
     internal class ControllerUsagePolicy : IRoutePolicy

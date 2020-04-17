@@ -1,11 +1,10 @@
-using Jasper;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests
+namespace Jasper.Http.Testing
 {
     public class chain_should_flush_messages
     {

@@ -1,12 +1,12 @@
 ﻿using System.Security.Claims;
 using System.Threading;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.Model
+namespace Jasper.Http.Testing.Model
 {
     public class ContextVariableSourceTester
     {

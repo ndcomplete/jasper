@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace HttpTests.AspNetCoreIntegration
+namespace Jasper.Http.Testing.AspNetCoreIntegration
 {
     public class ValuesController : Controller
     {

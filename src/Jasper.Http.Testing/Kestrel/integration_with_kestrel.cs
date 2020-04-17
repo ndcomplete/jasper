@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +14,7 @@ using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace HttpTests.Kestrel
+namespace Jasper.Http.Testing.Kestrel
 {
     public class DefaultApp : IDisposable
     {

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests
+namespace Jasper.Http.Testing
 {
     public class now_parameter_bindings : RegistryContext<HttpTestingApp>
     {

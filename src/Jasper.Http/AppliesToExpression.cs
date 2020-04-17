@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     public class AppliesToExpression
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Baseline;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     public static class ParameterInfoExtensions
     {
@@ -75,9 +75,6 @@ namespace JasperHttp.Routing
         }
 
         public string Description => $"{HttpMethod}: {Pattern}";
-
-        public string VariableName { get; } = "Route" + ++Count;
-
 
         public IEnumerable<ISegment> Segments => _segments;
 

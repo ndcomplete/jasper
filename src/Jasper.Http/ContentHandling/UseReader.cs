@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Reflection;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 
-namespace JasperHttp.ContentHandling
+namespace Jasper.Http.ContentHandling
 {
     public class UseReader : MethodCall
     {

@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Alba;
 using Baseline;
-using JasperHttp.Routing;
+using Jasper.Http.Routing;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class route_determination_with_spread : RegistryContext<RoutingApp>
     {

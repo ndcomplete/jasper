@@ -1,11 +1,10 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
 using Baseline.Reflection;
-using JasperHttp;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.ContentHandling
+namespace Jasper.Http.Testing.ContentHandling
 {
     public class write_status_code_returned_from_an_action : RegistryContext<HttpTestingApp>
     {

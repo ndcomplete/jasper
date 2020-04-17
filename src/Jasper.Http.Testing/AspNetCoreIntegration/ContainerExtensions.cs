@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
-using Jasper;
 using Lamar;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shouldly;
 
-namespace HttpTests.AspNetCoreIntegration
+namespace Jasper.Http.Testing.AspNetCoreIntegration
 {
     public static class ContainerExtensions
     {

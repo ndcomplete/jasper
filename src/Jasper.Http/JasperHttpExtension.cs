@@ -1,18 +1,16 @@
 using Baseline;
 using Baseline.Reflection;
-using Jasper;
+using Jasper.Http.ContentHandling;
+using Jasper.Http.MVCExtensions;
+using Jasper.Http.Routing;
 using Jasper.Serialization;
-using JasperHttp.ContentHandling;
-using JasperHttp.MVCExtensions;
-using JasperHttp.Routing;
 using Lamar;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     public class JasperHttpExtension : IJasperExtension
     {

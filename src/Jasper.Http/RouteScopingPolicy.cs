@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
-using JasperHttp.Model;
+using Jasper.Http.Model;
 using Lamar;
 using Lamar.IoC.Instances;
 using LamarCodeGeneration.Util;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     /// <summary>
     /// This ensures that any concrete type that services HTTP

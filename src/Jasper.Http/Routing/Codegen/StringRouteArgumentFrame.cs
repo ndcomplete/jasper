@@ -1,6 +1,6 @@
 ﻿using LamarCodeGeneration;
 
-namespace JasperHttp.Routing.Codegen
+namespace Jasper.Http.Routing.Codegen
 {
     public class StringRouteArgumentFrame : RouteArgumentFrame
     {

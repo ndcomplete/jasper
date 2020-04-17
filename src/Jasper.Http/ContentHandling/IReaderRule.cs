@@ -1,6 +1,6 @@
-﻿using JasperHttp.Model;
+﻿using Jasper.Http.Model;
 
-namespace JasperHttp.ContentHandling
+namespace Jasper.Http.ContentHandling
 {
     public interface IReaderRule
     {

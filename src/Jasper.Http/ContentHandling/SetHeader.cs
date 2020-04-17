@@ -4,7 +4,7 @@ using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 using Microsoft.AspNetCore.Http;
 
-namespace JasperHttp.ContentHandling
+namespace Jasper.Http.ContentHandling
 {
     public class SetHeader : Frame
     {

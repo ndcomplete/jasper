@@ -4,15 +4,15 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Baseline.Reflection;
 using Jasper.Attributes;
-using JasperHttp.ContentHandling;
-using JasperHttp.Model;
+using Jasper.Http.ContentHandling;
+using Jasper.Http.Model;
 using Lamar;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.Model
+namespace Jasper.Http.Testing.Model
 {
     public class RouteChainTester
     {

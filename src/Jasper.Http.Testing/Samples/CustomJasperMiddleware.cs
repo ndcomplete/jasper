@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Jasper;
 using Jasper.Attributes;
 using Jasper.Configuration;
+using Jasper.Http.Model;
 using Jasper.Runtime.Handlers;
-using JasperHttp;
-using JasperHttp.Model;
 using Lamar;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
@@ -14,7 +12,7 @@ using LamarCodeGeneration.Model;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Samples
+namespace Jasper.Http.Testing.Samples
 {
     // SAMPLE: StopwatchFrame
     public class StopwatchFrame : SyncFrame

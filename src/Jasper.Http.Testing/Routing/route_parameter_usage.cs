@@ -2,11 +2,10 @@
 using System.Threading.Tasks;
 using Alba;
 using Baseline.Reflection;
-using JasperHttp;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class route_parameter_usage : RegistryContext<HttpTestingApp>
     {

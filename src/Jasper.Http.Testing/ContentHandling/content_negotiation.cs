@@ -3,15 +3,14 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Alba;
 using Baseline;
-using Jasper;
+using Jasper.Http.ContentHandling;
 using Jasper.Util;
-using JasperHttp.ContentHandling;
 using Microsoft.AspNetCore.Http;
 using Shouldly;
 using TestingSupport;
 using Xunit;
 
-namespace HttpTests.ContentHandling
+namespace Jasper.Http.Testing.ContentHandling
 {
     public class ConnegRegistry : JasperOptions
     {

@@ -2,7 +2,7 @@
 using Alba;
 using Xunit;
 
-namespace HttpTests.ContentHandling
+namespace Jasper.Http.Testing.ContentHandling
 {
     public class write_plain_text_for_actions_that_return_strings : RegistryContext<HttpTestingApp>
     {

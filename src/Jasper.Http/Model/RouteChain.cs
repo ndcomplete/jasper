@@ -5,18 +5,17 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Baseline;
 using Baseline.Reflection;
-using Jasper;
 using Jasper.Configuration;
+using Jasper.Http.ContentHandling;
+using Jasper.Http.Routing;
 using Jasper.Serialization;
-using JasperHttp.ContentHandling;
-using JasperHttp.Routing;
 using Lamar;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 using Microsoft.AspNetCore.Http;
 
-namespace JasperHttp.Model
+namespace Jasper.Http.Model
 {
     public class RouteChain : Chain<RouteChain, ModifyRouteAttribute>
     {

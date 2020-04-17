@@ -1,8 +1,7 @@
-using JasperHttp;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests
+namespace Jasper.Http.Testing
 {
     public class HttpSettingsTests
     {

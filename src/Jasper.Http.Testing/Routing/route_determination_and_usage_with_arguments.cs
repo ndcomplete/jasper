@@ -2,12 +2,12 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Alba;
-using JasperHttp.Routing;
+using Jasper.Http.Routing;
 using Microsoft.AspNetCore.Http;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class FakeThing
     {

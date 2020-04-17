@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Alba;
 using Xunit;
 
-namespace HttpTests.ContentHandling
+namespace Jasper.Http.Testing.ContentHandling
 {
     public class default_error_handling : RegistryContext<HttpTestingApp>
     {

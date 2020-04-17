@@ -1,7 +1,7 @@
 using LamarCodeGeneration.Frames;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JasperHttp.MVCExtensions
+namespace Jasper.Http.MVCExtensions
 {
     public class BuildActionContext : ConstructorFrame<ActionContext>
     {

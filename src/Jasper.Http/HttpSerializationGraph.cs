@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using Jasper.Http.ContentHandling;
 using Jasper.Serialization;
-using JasperHttp.ContentHandling;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     public class HttpSerializationGraph : SerializationGraph<IRequestReader, IResponseWriter>
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using LamarCodeGeneration.Model;
 using Microsoft.AspNetCore.Http;
 
-namespace JasperHttp.Model
+namespace Jasper.Http.Model
 {
     public class ContextVariableSource : IVariableSource
     {

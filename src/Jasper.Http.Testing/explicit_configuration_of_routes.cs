@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Jasper.Attributes;
 using Jasper.Configuration;
-using JasperHttp.ContentHandling;
-using JasperHttp.Model;
-using Lamar;
+using Jasper.Http.ContentHandling;
+using Jasper.Http.Model;
 using LamarCodeGeneration;
 using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
@@ -14,7 +12,7 @@ using TestingSupport.Fakes;
 using Xunit;
 using Container = Lamar.Container;
 
-namespace HttpTests
+namespace Jasper.Http.Testing
 {
     public class explicit_configuration_of_routes
     {

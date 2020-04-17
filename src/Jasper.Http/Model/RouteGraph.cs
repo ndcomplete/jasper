@@ -7,7 +7,7 @@ using Baseline;
 using Baseline.Reflection;
 using LamarCodeGeneration.Frames;
 
-namespace JasperHttp.Model
+namespace Jasper.Http.Model
 {
     public class RouteGraph : IEnumerable<RouteChain>
     {

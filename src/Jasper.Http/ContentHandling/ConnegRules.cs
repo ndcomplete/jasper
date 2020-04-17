@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using Jasper.Http.Model;
 using Jasper.Serialization;
-using JasperHttp.Model;
 
-namespace JasperHttp.ContentHandling
+namespace Jasper.Http.ContentHandling
 {
     public class ConnegRules : IWriterRule, IReaderRule
     {

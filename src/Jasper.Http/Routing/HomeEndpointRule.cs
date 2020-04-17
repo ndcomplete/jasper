@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Baseline;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     internal class HomeEndpointRule : IPatternRule
     {

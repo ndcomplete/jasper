@@ -3,10 +3,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
-using Jasper;
-using JasperHttp.ContentHandling;
-using JasperHttp.Model;
-using JasperHttp.Routing;
+using Jasper.Http.ContentHandling;
+using Jasper.Http.Model;
+using Jasper.Http.Routing;
 using Lamar;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +14,7 @@ using Shouldly;
 using TestingSupport;
 using Xunit;
 
-namespace HttpTests
+namespace Jasper.Http.Testing
 {
     public class HttpBootstrappedApp : JasperOptions
     {

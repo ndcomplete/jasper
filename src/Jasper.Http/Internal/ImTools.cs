@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace JasperHttp.Internal
+namespace Jasper.Http.Internal
 { // For [MethodImpl(AggressiveInlining)]
 
 

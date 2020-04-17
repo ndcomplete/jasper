@@ -1,11 +1,11 @@
 ﻿using System;
 using Jasper.Attributes;
-using JasperHttp.Routing;
+using Jasper.Http.Routing;
 using Shouldly;
 using TestMessages;
 using Xunit;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class RouteBuilderTests
     {

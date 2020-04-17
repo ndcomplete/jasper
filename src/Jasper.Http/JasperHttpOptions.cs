@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Baseline;
 using Baseline.Reflection;
 using Jasper.Attributes;
-using JasperHttp.Model;
-using JasperHttp.Routing;
-using Lamar;
-using LamarCodeGeneration;
+using Jasper.Http.Model;
+using Jasper.Http.Routing;
 using Microsoft.AspNetCore.Mvc.Routing;
 
-namespace JasperHttp
+namespace Jasper.Http
 {
     public enum ComplianceMode
     {

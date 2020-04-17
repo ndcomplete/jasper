@@ -2,11 +2,11 @@
 using System.Linq;
 using Baseline;
 using Baseline.Reflection;
-using JasperHttp.Routing;
+using Jasper.Http.Routing;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.Routing
+namespace Jasper.Http.Testing.Routing
 {
     public class Reverse_Url_Lookup_Tests
     {

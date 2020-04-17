@@ -3,11 +3,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Baseline;
+using Jasper.Http.ContentHandling;
 using Jasper.Serialization;
-using JasperHttp.ContentHandling;
 using Microsoft.AspNetCore.Http;
 
-namespace JasperHttp.Model
+namespace Jasper.Http.Model
 {
     public abstract class RouteHandler
     {

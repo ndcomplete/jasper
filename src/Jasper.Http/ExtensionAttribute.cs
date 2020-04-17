@@ -1,4 +1,4 @@
 using Jasper.Attributes;
-using JasperHttp;
+using Jasper.Http;
 
 [assembly: JasperModule(typeof(JasperHttpExtension))]

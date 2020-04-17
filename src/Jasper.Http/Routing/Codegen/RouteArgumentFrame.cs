@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using LamarCodeGeneration.Frames;
 using LamarCodeGeneration.Model;
 
-namespace JasperHttp.Routing.Codegen
+namespace Jasper.Http.Routing.Codegen
 {
     public abstract class RouteArgumentFrame : SyncFrame
     {

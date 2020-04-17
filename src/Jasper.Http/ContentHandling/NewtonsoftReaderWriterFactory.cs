@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.ObjectPool;
 using Newtonsoft.Json;
 
-namespace JasperHttp.ContentHandling
+namespace Jasper.Http.ContentHandling
 {
     public interface IResponseWriter : IWriterStrategy
     {

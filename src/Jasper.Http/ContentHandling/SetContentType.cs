@@ -1,4 +1,4 @@
-﻿namespace JasperHttp.ContentHandling
+﻿namespace Jasper.Http.ContentHandling
 {
     public class SetContentType : SetHeader
     {

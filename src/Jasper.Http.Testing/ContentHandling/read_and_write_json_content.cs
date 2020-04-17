@@ -3,7 +3,7 @@ using Alba;
 using Shouldly;
 using Xunit;
 
-namespace HttpTests.ContentHandling
+namespace Jasper.Http.Testing.ContentHandling
 {
     public class read_and_write_json_content : RegistryContext<HttpTestingApp>
     {

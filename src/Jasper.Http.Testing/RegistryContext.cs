@@ -2,14 +2,13 @@
 using System.Threading.Tasks;
 using Alba;
 using Baseline;
-using Jasper;
 using Jasper.Runtime.Handlers;
 using Lamar;
 using Microsoft.Extensions.DependencyInjection;
 using TestingSupport;
 using Xunit;
 
-namespace HttpTests
+namespace Jasper.Http.Testing
 {
     public class BasicAppNoHandling : JasperOptions
     {

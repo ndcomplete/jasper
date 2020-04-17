@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Baseline.Reflection;
-using JasperHttp.Routing;
+using Jasper.Http.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 
-namespace JasperHttp.MVCExtensions
+namespace Jasper.Http.MVCExtensions
 {
     public class HttpAttributePatternRule : IPatternRule
     {

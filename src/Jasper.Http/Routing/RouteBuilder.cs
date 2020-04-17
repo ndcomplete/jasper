@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Baseline;
 using Baseline.Reflection;
+using Jasper.Http.Routing.Codegen;
 using Jasper.Util;
-using JasperHttp.Routing.Codegen;
 using LamarCodeGeneration;
 
-namespace JasperHttp.Routing
+namespace Jasper.Http.Routing
 {
     // This is mostly tested through Storyteller specs
     public static class RouteBuilder
