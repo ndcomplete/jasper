@@ -39,7 +39,6 @@ namespace Jasper.Http.Model
             InputType = RouteBuilder.DetermineInputType(action.Method);
             ResourceType = action.ReturnVariable?.VariableType;
 
-            Route.Chain = this;
         }
 
         public RouteChain(MethodCall action) : this(action, RouteBuilder.Build(action.HandlerType, action.Method))

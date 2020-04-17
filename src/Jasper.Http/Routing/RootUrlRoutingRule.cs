@@ -5,9 +5,9 @@ using Baseline;
 
 namespace Jasper.Http.Routing
 {
-    internal class VerbMethodNames : IPatternRule
+    internal class VerbMethodNames : IRoutingRule
     {
-        public RoutePattern DetermineRoute(Type handlerType, MethodInfo method)
+        public Route DetermineRoute(Type handlerType, MethodInfo method)
         {
             var httpMethod = HttpVerbs.All.FirstOrDefault(x => x.EqualsIgnoreCase(method.Name));
             if (httpMethod.IsEmpty()) return null;
@@ -17,13 +17,13 @@ namespace Jasper.Http.Routing
 
             var pattern = $"/{method.Name.ToLowerInvariant()}/{arguments}";
 
-            return new RoutePattern(httpMethod, pattern);
+            return new Route(pattern, httpMethod);
         }
     }
 
-    internal class RootUrlRoutingRule : IPatternRule
+    internal class RootUrlRoutingRule : IRoutingRule
     {
-        public RoutePattern DetermineRoute(Type handlerType, MethodInfo method)
+        public Route DetermineRoute(Type handlerType, MethodInfo method)
         {
             if (!HttpVerbs.All.Any(x => method.Name.StartsWith(x + "_", StringComparison.OrdinalIgnoreCase)))
                 return null;
@@ -47,7 +47,7 @@ namespace Jasper.Http.Routing
                 .ToArray();
 
 
-            return new RoutePattern(verb, parts.Join("/"), segments);
+            return new Route(segments, verb);
         }
     }
 }

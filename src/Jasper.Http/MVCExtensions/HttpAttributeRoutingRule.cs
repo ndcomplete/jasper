@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Jasper.Http.MVCExtensions
 {
-    public class HttpAttributePatternRule : IPatternRule
+    public class HttpAttributeRoutingRule : IRoutingRule
     {
-        public RoutePattern DetermineRoute(Type handlerType, MethodInfo method)
+        public Route DetermineRoute(Type handlerType, MethodInfo method)
         {
             if (method.HasAttribute<HttpMethodAttribute>())
             {
@@ -20,7 +20,7 @@ namespace Jasper.Http.MVCExtensions
                 var pattern = RoutePrefixFor(handlerType).ToLowerInvariant() + "/" + att.Template ?? "";
 
 
-                return new RoutePattern(httpMethod, pattern.TrimEnd('/'))
+                return new Route(httpMethod, pattern.TrimEnd('/'))
                 {
                     Order = att.Order
                 };

@@ -3,13 +3,14 @@ using System.Reflection;
 
 namespace Jasper.Http.Routing
 {
-    public interface IPatternRule
+    public interface IRoutingRule
     {
         /// <summary>
         ///     Return null if the rule does not match
         /// </summary>
+        /// <param name="handlerType"></param>
         /// <param name="method"></param>
         /// <returns></returns>
-        RoutePattern DetermineRoute(Type handlerType, MethodInfo method);
+        Route DetermineRoute(Type handlerType, MethodInfo method);
     }
 }

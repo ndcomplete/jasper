@@ -5,16 +5,16 @@ using Baseline;
 
 namespace Jasper.Http.Routing
 {
-    internal class HomeEndpointRule : IPatternRule
+    internal class HomeEndpointRule : IRoutingRule
     {
-        public RoutePattern DetermineRoute(Type handlerType, MethodInfo method)
+        public Route DetermineRoute(Type handlerType, MethodInfo method)
         {
             if (handlerType.Name == "HomeEndpoint" || handlerType.Name == "ServiceEndpoint")
             {
                 var httpMethod = determineHttpMethodName(method);
                 if (httpMethod.IsEmpty()) return null;
 
-                return new RoutePattern(httpMethod, "/");
+                return new Route(httpMethod, "/");
             }
 
             return null;

@@ -32,13 +32,13 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void cannot_have_a_spread()
         {
-            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new Route("...", "GET"); });
+            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new Route("GET", "..."); });
         }
 
         [Fact]
         public void cannot_have_multiple_spreads_either()
         {
-            Action action = () => { new Route("a/.../b/...", "GET"); };
+            Action action = () => { new Route("GET", "a/.../b/..."); };
 
             action.ShouldThrow<InvalidOperationException>();
         }
@@ -46,7 +46,7 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void cannot_have_only_an_argument()
         {
-            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new Route(":arg", "GET"); });
+            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new Route("GET", ":arg"); });
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void spread_has_to_be_last()
         {
-            Action action = () => { new Route("a/.../b", "GET"); };
+            Action action = () => { new Route("GET", "a/.../b"); };
             action.ShouldThrow<ArgumentOutOfRangeException>();
         }
     }
