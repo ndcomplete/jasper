@@ -7,7 +7,7 @@ namespace Jasper.Http.Routing
 {
     internal class VerbMethodNames : IRoutingRule
     {
-        public Route DetermineRoute(Type handlerType, MethodInfo method)
+        public JasperRoute DetermineRoute(Type handlerType, MethodInfo method)
         {
             var httpMethod = HttpVerbs.All.FirstOrDefault(x => x.EqualsIgnoreCase(method.Name));
             if (httpMethod.IsEmpty()) return null;
@@ -17,13 +17,13 @@ namespace Jasper.Http.Routing
 
             var pattern = $"/{method.Name.ToLowerInvariant()}/{arguments}";
 
-            return new Route(pattern, httpMethod);
+            return new JasperRoute(pattern, httpMethod);
         }
     }
 
     internal class RootUrlRoutingRule : IRoutingRule
     {
-        public Route DetermineRoute(Type handlerType, MethodInfo method)
+        public JasperRoute DetermineRoute(Type handlerType, MethodInfo method)
         {
             if (!HttpVerbs.All.Any(x => method.Name.StartsWith(x + "_", StringComparison.OrdinalIgnoreCase)))
                 return null;
@@ -47,7 +47,7 @@ namespace Jasper.Http.Routing
                 .ToArray();
 
 
-            return new Route(segments, verb);
+            return new JasperRoute(segments, verb);
         }
     }
 }

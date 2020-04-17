@@ -5,20 +5,20 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Baseline;
 using Baseline.Reflection;
-using HandlerMethods = Baseline.LightweightCache<string, Jasper.Http.Routing.Route>;
+using HandlerMethods = Baseline.LightweightCache<string, Jasper.Http.Routing.JasperRoute>;
 
 namespace Jasper.Http.Routing
 {
     public class UrlGraph : IUrlRegistry
     {
-        private readonly LightweightCache<Type, List<Route>> _routesByInputModel
-            = new LightweightCache<Type, List<Route>>(_ => new List<Route>());
+        private readonly LightweightCache<Type, List<JasperRoute>> _routesByInputModel
+            = new LightweightCache<Type, List<JasperRoute>>(_ => new List<JasperRoute>());
 
         private readonly LightweightCache<Type, HandlerMethods> _routesPerHandler
             = new LightweightCache<Type, HandlerMethods>(type => new HandlerMethods());
 
-        private readonly LightweightCache<string, Route> _routesPerName
-            = new LightweightCache<string, Route>();
+        private readonly LightweightCache<string, JasperRoute> _routesPerName
+            = new LightweightCache<string, JasperRoute>();
 
         public string UrlFor(object model, string httpMethod = null)
         {
@@ -80,7 +80,7 @@ namespace Jasper.Http.Routing
         }
 
 
-        public void Register(Route route)
+        public void Register(JasperRoute route)
         {
             _routesPerName[route.Name] = route;
             if (route.InputType != null) _routesByInputModel[route.InputType].Add(route);
@@ -88,30 +88,30 @@ namespace Jasper.Http.Routing
             if (route.HandlerType != null) _routesPerHandler[route.HandlerType][route.Method.Name] = route;
         }
 
-        public Route RouteFor(object model, string httpMethod = null)
+        public JasperRoute RouteFor(object model, string httpMethod = null)
         {
             var routes = _routesByInputModel[model.GetType()];
             return resolveRoute(httpMethod, routes);
         }
 
-        private static void assertNoParameters(Route route)
+        private static void assertNoParameters(JasperRoute route)
         {
             if (route.HasParameters || route.HasSpread)
-                throw new UrlResolutionException($"Route {route} has arguments and cannot be resolved this way");
+                throw new UrlResolutionException($"JasperRoute {route} has arguments and cannot be resolved this way");
         }
 
-        public Route RouteFor<T>(string httpMethod = null)
+        public JasperRoute RouteFor<T>(string httpMethod = null)
         {
             return RouteFor(typeof(T), httpMethod);
         }
 
-        public Route RouteFor(Type handlerOrInputType, string httpMethod = null)
+        public JasperRoute RouteFor(Type handlerOrInputType, string httpMethod = null)
         {
             var routes = _routesPerHandler[handlerOrInputType].Concat(_routesByInputModel[handlerOrInputType]);
             return resolveRoute(httpMethod, routes);
         }
 
-        private static Route resolveRoute(string httpMethod, IEnumerable<Route> routes)
+        private static JasperRoute resolveRoute(string httpMethod, IEnumerable<JasperRoute> routes)
         {
             if (!routes.Any()) throw new UrlResolutionException("There are no matching routes");
 
@@ -135,7 +135,7 @@ namespace Jasper.Http.Routing
             return matching;
         }
 
-        public Route RouteFor(Type handlerType, MethodInfo method)
+        public JasperRoute RouteFor(Type handlerType, MethodInfo method)
         {
             if (!_routesPerHandler.Has(handlerType))
                 throw new UrlResolutionException($"There are no matching routes for handler {handlerType.FullName}");
@@ -149,7 +149,7 @@ namespace Jasper.Http.Routing
             return route;
         }
 
-        private Route RouteByName(string routeName)
+        private JasperRoute RouteByName(string routeName)
         {
             return _routesPerName.Has(routeName) ? _routesPerName[routeName] : null;
         }

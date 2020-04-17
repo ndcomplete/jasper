@@ -10,7 +10,7 @@ namespace Jasper.Http.MVCExtensions
 {
     public class HttpAttributeRoutingRule : IRoutingRule
     {
-        public Route DetermineRoute(Type handlerType, MethodInfo method)
+        public JasperRoute DetermineRoute(Type handlerType, MethodInfo method)
         {
             if (method.HasAttribute<HttpMethodAttribute>())
             {
@@ -20,7 +20,7 @@ namespace Jasper.Http.MVCExtensions
                 var pattern = RoutePrefixFor(handlerType).ToLowerInvariant() + "/" + att.Template ?? "";
 
 
-                return new Route(httpMethod, pattern.TrimEnd('/'))
+                return new JasperRoute(httpMethod, pattern.TrimEnd('/'))
                 {
                     Order = att.Order
                 };

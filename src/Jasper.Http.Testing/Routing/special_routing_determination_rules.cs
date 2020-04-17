@@ -10,25 +10,25 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void homeendpoint()
         {
-            Route.Build<HomeEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
-            Route.Build<HomeEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
-            Route.Build<HomeEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
-            Route.Build<HomeEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
+            JasperRoute.Build<HomeEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
+            JasperRoute.Build<HomeEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
+            JasperRoute.Build<HomeEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
+            JasperRoute.Build<HomeEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
         }
 
         [Fact]
         public void serviceendpoint()
         {
-            Route.Build<ServiceEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
-            Route.Build<ServiceEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
-            Route.Build<ServiceEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
-            Route.Build<ServiceEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
+            JasperRoute.Build<ServiceEndpoint>(x => x.Index()).MethodAndPatternShouldBe("GET", "");
+            JasperRoute.Build<ServiceEndpoint>(x => x.Get()).MethodAndPatternShouldBe("GET", "");
+            JasperRoute.Build<ServiceEndpoint>(x => x.Put()).MethodAndPatternShouldBe("PUT", "");
+            JasperRoute.Build<ServiceEndpoint>(x => x.Delete()).MethodAndPatternShouldBe("DELETE", "");
         }
     }
 
     public static class RouteSpecificationExtensions
     {
-        public static void MethodAndPatternShouldBe(this Route route, string method, string pattern)
+        public static void MethodAndPatternShouldBe(this JasperRoute route, string method, string pattern)
         {
             route.HttpMethod.ShouldBe(method);
             route.Pattern.ShouldBe(pattern);

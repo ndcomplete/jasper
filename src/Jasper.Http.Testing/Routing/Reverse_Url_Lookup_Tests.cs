@@ -24,7 +24,7 @@ namespace Jasper.Http.Testing.Routing
         {
             typeof(T).GetMethods().Where(x => x.DeclaringType != typeof(object)).Each(method =>
             {
-                var route = Route.Build(typeof(T), method);
+                var route = JasperRoute.Build(typeof(T), method);
                 graph.Register(route);
             });
         }

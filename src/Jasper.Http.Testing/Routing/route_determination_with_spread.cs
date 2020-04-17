@@ -50,7 +50,7 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void route_with_path_segments()
         {
-            var route = Route.Build<SpreadHttpActions>(x => x.get_file(null));
+            var route = JasperRoute.Build<SpreadHttpActions>(x => x.get_file(null));
             route.Pattern.ShouldBe("file/...");
             route.Segments.Last().ShouldBeOfType<Spread>();
         }
@@ -58,7 +58,7 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void route_with_relative_path()
         {
-            var route = Route.Build<SpreadHttpActions>(x => x.get_folder(null));
+            var route = JasperRoute.Build<SpreadHttpActions>(x => x.get_folder(null));
             route.Pattern.ShouldBe("folder/...");
             route.Segments.Last().ShouldBeOfType<Spread>();
         }

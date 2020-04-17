@@ -11,6 +11,6 @@ namespace Jasper.Http.Routing
         /// <param name="handlerType"></param>
         /// <param name="method"></param>
         /// <returns></returns>
-        Route DetermineRoute(Type handlerType, MethodInfo method);
+        JasperRoute DetermineRoute(Type handlerType, MethodInfo method);
     }
 }

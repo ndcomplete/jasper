@@ -24,9 +24,9 @@ namespace Jasper.Http.Testing.Routing
         {
         }
 
-        private Route routeFor(Expression<Action<RouteEndpoints>> expression)
+        private JasperRoute routeFor(Expression<Action<RouteEndpoints>> expression)
         {
-            return Route.Build(expression);
+            return JasperRoute.Build(expression);
         }
 
         [Fact]

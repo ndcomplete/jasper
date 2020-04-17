@@ -7,14 +7,14 @@ namespace Jasper.Http.Routing
 {
     internal class HomeEndpointRule : IRoutingRule
     {
-        public Route DetermineRoute(Type handlerType, MethodInfo method)
+        public JasperRoute DetermineRoute(Type handlerType, MethodInfo method)
         {
             if (handlerType.Name == "HomeEndpoint" || handlerType.Name == "ServiceEndpoint")
             {
                 var httpMethod = determineHttpMethodName(method);
                 if (httpMethod.IsEmpty()) return null;
 
-                return new Route(httpMethod, "/");
+                return new JasperRoute(httpMethod, "/");
             }
 
             return null;

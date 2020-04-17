@@ -5,7 +5,7 @@ namespace Jasper.Http.Routing.Codegen
 {
     public class PathSegmentsFrame : RouteArgumentFrame
     {
-        public PathSegmentsFrame(int position) : base(Route.PathSegments, position, typeof(string[]))
+        public PathSegmentsFrame(int position) : base(JasperRoute.PathSegments, position, typeof(string[]))
         {
         }
 

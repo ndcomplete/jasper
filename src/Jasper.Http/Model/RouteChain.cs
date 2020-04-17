@@ -29,7 +29,7 @@ namespace Jasper.Http.Model
 
         private bool _hasDeterminedFrames;
 
-        public RouteChain(MethodCall action, Route route)
+        public RouteChain(MethodCall action, JasperRoute route)
         {
             Action = action;
             Route = route;
@@ -41,11 +41,11 @@ namespace Jasper.Http.Model
 
         }
 
-        public RouteChain(MethodCall action) : this(action, Route.Build(action.HandlerType, action.Method))
+        public RouteChain(MethodCall action) : this(action, JasperRoute.Build(action.HandlerType, action.Method))
         {
         }
 
-        public override string Description => $"Route '{Route.Description}'";
+        public override string Description => $"JasperRoute '{Route.Description}'";
 
         public string SourceCode => _generatedType.SourceCode;
 
@@ -66,7 +66,7 @@ namespace Jasper.Http.Model
         /// <summary>
         ///     Information about the HTTP route pattern for this RouteChain
         /// </summary>
-        public Route Route { get; }
+        public JasperRoute Route { get; }
 
         /// <summary>
         ///     May be null

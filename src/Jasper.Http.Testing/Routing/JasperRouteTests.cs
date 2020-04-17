@@ -7,12 +7,12 @@ using Xunit;
 
 namespace Jasper.Http.Testing.Routing
 {
-    public class RouteTests
+    public class JasperRouteTests
     {
         [Fact]
         public void argument_in_brackets()
         {
-            var arg = Route.ToParameter("{bar}", 3).ShouldBeOfType<RouteArgument>();
+            var arg = JasperRoute.ToParameter("{bar}", 3).ShouldBeOfType<RouteArgument>();
             arg.Position.ShouldBe(3);
             arg.Key.ShouldBe("bar");
         }
@@ -20,7 +20,7 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void argument_starting_with_colon()
         {
-            var arg = Route.ToParameter(":foo", 2).ShouldBeOfType<RouteArgument>();
+            var arg = JasperRoute.ToParameter(":foo", 2).ShouldBeOfType<RouteArgument>();
             arg.Position.ShouldBe(2);
             arg.Key.ShouldBe("foo");
         }
@@ -28,19 +28,19 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void blank_segment()
         {
-            Route.ToParameter("foo", 0).ShouldBeOfType<Segment>().Path.ShouldBe("foo");
+            JasperRoute.ToParameter("foo", 0).ShouldBeOfType<Segment>().Path.ShouldBe("foo");
         }
 
         [Fact]
         public void cannot_have_a_spread()
         {
-            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new Route("GET", "..."); });
+            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new JasperRoute("GET", "..."); });
         }
 
         [Fact]
         public void cannot_have_multiple_spreads_either()
         {
-            Action action = () => { new Route("GET", "a/.../b/..."); };
+            Action action = () => { new JasperRoute("GET", "a/.../b/..."); };
 
             action.ShouldThrow<InvalidOperationException>();
         }
@@ -48,20 +48,20 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void cannot_have_only_an_argument()
         {
-            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new Route("GET", ":arg"); });
+            Exception<InvalidOperationException>.ShouldBeThrownBy(() => { new JasperRoute("GET", ":arg"); });
         }
 
         [Fact]
         public void spread()
         {
-            Route.ToParameter("...", 4).ShouldBeOfType<Spread>()
+            JasperRoute.ToParameter("...", 4).ShouldBeOfType<Spread>()
                 .Position.ShouldBe(4);
         }
 
         [Fact]
         public void spread_has_to_be_last()
         {
-            Action action = () => { new Route("GET", "a/.../b"); };
+            Action action = () => { new JasperRoute("GET", "a/.../b"); };
             action.ShouldThrow<ArgumentOutOfRangeException>();
         }
 
@@ -69,7 +69,7 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void assign_the_handler_type_and_method()
         {
-            var route = Route.Build<SomeEndpoint>(x => x.post_go());
+            var route = JasperRoute.Build<SomeEndpoint>(x => x.post_go());
             route.HandlerType.ShouldBe(typeof(SomeEndpoint));
             route.Method.Name.ShouldBe("post_go");
         }
@@ -77,42 +77,42 @@ namespace Jasper.Http.Testing.Routing
         [Fact]
         public void assign_the_input_type_if_is_one()
         {
-            var route = Route.Build<SomeEndpoint>(x => x.post_something(null));
+            var route = JasperRoute.Build<SomeEndpoint>(x => x.post_something(null));
             route.InputType.ShouldBe(typeof(Input1));
         }
 
         [Fact]
         public void no_input_type_if_none()
         {
-            var route = Route.Build<SomeEndpoint>(x => x.delete_something(null));
+            var route = JasperRoute.Build<SomeEndpoint>(x => x.delete_something(null));
             route.InputType.ShouldBeNull();
         }
 
         [Fact]
         public void picks_up_custom_route_name_from_attribute_if_any()
         {
-            var route = Route.Build<SomeEndpoint>(x => x.get_named());
+            var route = JasperRoute.Build<SomeEndpoint>(x => x.get_named());
             route.Name.ShouldBe("Finn");
         }
 
         [Fact]
         public void support_the_one_in_model()
         {
-            var route = Route.Build<SomeEndpoint>(x => x.put_message1(null));
+            var route = JasperRoute.Build<SomeEndpoint>(x => x.put_message1(null));
             route.InputType.ShouldBe(typeof(Message1));
         }
 
         [Fact]
         public void use_dash_in_route()
         {
-            Route.Build<DashAndUnderscoreEndpoint>(x => x.get_cool___stuff())
+            JasperRoute.Build<DashAndUnderscoreEndpoint>(x => x.get_cool___stuff())
                 .Pattern.ShouldBe("cool-stuff");
         }
 
         [Fact]
         public void use_underscore_in_route()
         {
-            Route.Build<DashAndUnderscoreEndpoint>(x => x.get__text())
+            JasperRoute.Build<DashAndUnderscoreEndpoint>(x => x.get__text())
                 .Pattern.ShouldBe("_text");
         }
     }
@@ -125,11 +125,11 @@ namespace Jasper.Http.Testing.Routing
                 {new Segment("folder", 0), new Segment("folder2", 1), new RouteArgument("name", 2)};
 
 
-            route = new Route(segments, HttpVerbs.PUT);
+            route = new JasperRoute(segments, HttpVerbs.PUT);
         }
 
         private readonly ISegment[] segments;
-        private readonly Route route;
+        private readonly JasperRoute route;
 
         [Fact]
         public void should_build_the_pattern_from_the_segments()

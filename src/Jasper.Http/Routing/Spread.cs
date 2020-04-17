@@ -16,7 +16,7 @@ namespace Jasper.Http.Routing
         public Frame ToParsingFrame(MethodCall action)
         {
             var parameter = action.Method.GetParameters().Single(x => x.IsSpread());
-            return parameter.Name == Route.PathSegments
+            return parameter.Name == JasperRoute.PathSegments
                 ? (Frame) new PathSegmentsFrame(Position)
                 : new RelativePathFrame(Position);
         }

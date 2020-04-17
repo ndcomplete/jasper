@@ -52,7 +52,7 @@ namespace Jasper.Http
 
             registry.Services.AddSingleton<IWriterRule, ActionResultWriterRule>();
 
-            Route.Rules.Insert(0, new HttpAttributeRoutingRule());
+            JasperRoute.Rules.Insert(0, new HttpAttributeRoutingRule());
         }
     }
 }

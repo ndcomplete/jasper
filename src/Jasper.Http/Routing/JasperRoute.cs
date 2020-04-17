@@ -9,7 +9,6 @@ using Jasper.Http.Model;
 using Jasper.Http.Routing.Codegen;
 using Jasper.Util;
 using LamarCodeGeneration;
-using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Jasper.Http.Routing
 {
@@ -17,26 +16,26 @@ namespace Jasper.Http.Routing
     {
         public static bool IsSpread(this ParameterInfo parameter)
         {
-            if (parameter.Name == Route.RelativePath && parameter.ParameterType == typeof(string)) return true;
-            if (parameter.Name == Route.PathSegments && parameter.ParameterType == typeof(string[])) return true;
+            if (parameter.Name == JasperRoute.RelativePath && parameter.ParameterType == typeof(string)) return true;
+            if (parameter.Name == JasperRoute.PathSegments && parameter.ParameterType == typeof(string[])) return true;
             return false;
         }
     }
 
-    public class Route
+    public class JasperRoute
     {
         public static readonly IList<string> InputTypeNames = new List<string> {"input", "query", "message", "body"};
 
         public static IList<IRoutingRule> Rules = new List<IRoutingRule>
             {new HomeEndpointRule(), new RootUrlRoutingRule(), new VerbMethodNames()};
 
-        public static Route Build<T>(Expression<Action<T>> expression)
+        public static JasperRoute Build<T>(Expression<Action<T>> expression)
         {
             var method = ReflectionHelper.GetMethod(expression);
             return Build(typeof(T), method);
         }
 
-                public static Route Build(Type handlerType, MethodInfo method)
+                public static JasperRoute Build(Type handlerType, MethodInfo method)
         {
             var route = Rules.FirstValue(x => x.DetermineRoute(handlerType, method));
             if (route == null)
@@ -75,7 +74,7 @@ namespace Jasper.Http.Routing
             var spreads = method.GetParameters().Where(x => x.IsSpread()).ToArray();
             if (spreads.Length > 1)
                 throw new InvalidOperationException(
-                    $"An HTTP action method can only take in either '{Route.PathSegments}' or '{Route.RelativePath}', but not both. Error with action {handlerType.FullName}.{method.Name}()");
+                    $"An HTTP action method can only take in either '{JasperRoute.PathSegments}' or '{JasperRoute.RelativePath}', but not both. Error with action {handlerType.FullName}.{method.Name}()");
 
             var segments = route.Segments;
             if (spreads.Length == 1) segments = segments.Concat(new ISegment[] {new Spread(segments.Count)}).ToList();
@@ -105,7 +104,7 @@ namespace Jasper.Http.Routing
         private Spread _spread;
 
 
-        public Route(string httpMethod, string pattern)
+        public JasperRoute(string httpMethod, string pattern)
         {
             pattern = pattern?.TrimStart('/').TrimEnd('/') ?? throw new ArgumentNullException(nameof(pattern));
 
@@ -136,7 +135,7 @@ namespace Jasper.Http.Routing
             setupArgumentsAndSpread();
         }
 
-        public Route(ISegment[] segments, string httpVerb)
+        public JasperRoute(ISegment[] segments, string httpVerb)
         {
             Segments.AddRange(segments);
 
@@ -175,9 +174,9 @@ namespace Jasper.Http.Routing
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static Route For(string url, string httpMethod)
+        public static JasperRoute For(string url, string httpMethod)
         {
-            return new Route(httpMethod ?? HttpVerbs.GET, url.TrimStart('/'));
+            return new JasperRoute(httpMethod ?? HttpVerbs.GET, url.TrimStart('/'));
         }
 
         public static ISegment ToParameter(string path, int position)
