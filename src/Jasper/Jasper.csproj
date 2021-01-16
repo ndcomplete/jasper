@@ -14,7 +14,7 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-    <LangVersion>8</LangVersion>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Baseline" Version="2.1.1" />
@@ -35,7 +35,7 @@
     <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks.Dataflow" Version="[4.11.0, 5.0.0)" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
-    <PackageReference Include="Oakton.AspNetCore" Version="2.1.5" />
+    <PackageReference Include="Oakton.AspNetCore" Version="[2.1.5,3.0.0)" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
