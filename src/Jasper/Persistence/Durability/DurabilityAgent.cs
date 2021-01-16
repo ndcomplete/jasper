@@ -223,8 +223,13 @@ namespace Jasper.Persistence.Durability
         {
             if (_disabled) return;
 
+#if NETSTANDARD2_0
+            _nodeReassignmentTimer.Dispose();
+            _scheduledJobTimer.Dispose();
+#else
             await _nodeReassignmentTimer.DisposeAsync();
             await _scheduledJobTimer.DisposeAsync();
+#endif
 
             _worker.Complete();
 

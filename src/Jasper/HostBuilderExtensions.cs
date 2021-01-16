@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Baseline;
 using Jasper.Runtime;
 using Lamar;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Oakton.AspNetCore;
 
 namespace Jasper
 {
@@ -100,7 +96,11 @@ namespace Jasper
         /// <returns></returns>
         public static Task<int> RunJasper(this IHostBuilder hostBuilder, string[] args)
         {
-            return hostBuilder.RunOaktonCommands(args);
+            // TODO: IHostBuilder.RunOaktonCommands does not have a netstandard2.0
+            // version until another merge gets approved and the package updated.
+            // afterwards, this line can be reinstated.
+            //return hostBuilder.RunOaktonCommands(args);
+            throw new NotImplementedException();
         }
 
         public static T Get<T>(this IHost host)
